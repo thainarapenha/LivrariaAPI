@@ -3,18 +3,18 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/thainarapenha/LivrariaAPI.git"
+    "dev": "nodemon ./src/server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/thainarapenha/LivrariaAPI/issues"
+  "dependencies": {
+    "express": "^4.18.1",
+    "sqlite3": "^5.0.11"
   },
-  "homepage": "https://github.com/thainarapenha/LivrariaAPI#readme"
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
 }
