@@ -1,6 +1,6 @@
 import express from 'express';
 import { Usuarios } from './controller/UsuarioController.js'
-import bd from './data/db.js'
+import bd from './data/sqlite.js';
 
 const app = express();
 const port = 3000;
