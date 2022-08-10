@@ -1,10 +1,11 @@
-import { UsuarioDAO } from "../DAO/UsuarioDAO.js"
+import  UsuarioDAO  from "../DAO/UsuarioDAO.js"
+import { validacaoUsuario } from "../middleware/validacaoUsuario.js"
 
 export const Usuarios = (app, bd) => {
 
     //CREATE
 
-    app.post('/usuarios', (req, res) => {
+    app.post('/usuarios', validacaoUsuario, (req, res) => {
         const usuario = req.body
         UsuarioDAO.adicionarUsuario(bd, usuario)
             .then((success) => {
