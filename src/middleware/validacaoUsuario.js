@@ -24,9 +24,9 @@ function validacaoUsuario(request, response, next) {
 }
 
 const validaCPF = CPF => {
-  const CPFatualizado = CPF.replace(/\D/g, '');
+  const CPFatualizado = String(CPF).replace(/\D/g, '');
 
-  if (CPFatualizado.length !== 11) {
+  if (CPFatualizado.length !== 11 && !/[A-Z]/gi.test(CPFatualizado)) {
     return false;
   }
 

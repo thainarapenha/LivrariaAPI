@@ -7,7 +7,7 @@ const port = 3000;
 
 app.use(express.json());
 
-Usuarios(app);
+Usuarios(app, bd);
 
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
