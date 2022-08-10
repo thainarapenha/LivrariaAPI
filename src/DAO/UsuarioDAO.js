@@ -36,11 +36,19 @@ export default class UsuarioDAO {
         'INSERT INTO usuarios (nome, email, senha, CPF) VALUES (?, ?, ?, ?)',
         [nome, email, senha, CPF],
         erro => {
-          if (erro) {
-            reject(erro);
-          } else {
+          if (!erro) {
             resolve('Usuário adicionado com sucesso!');
           }
+
+          if (erro.message.includes('UNIQUE constraint failed')) {
+            if (erro.message.includes('email')) {
+              reject('E-mail já cadastrado!');
+            } else if (erro.message.includes('CPF')) {
+              reject('CPF já cadastrado!');
+            }
+          }
+
+          reject(erro);
         }
       );
     });
