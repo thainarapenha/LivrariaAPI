@@ -1,12 +1,13 @@
 import express from 'express';
+import { Usuarios } from './controller/UsuarioController.js'
+import bd from './data/db.js'
 
 const app = express();
 const port = 3000;
 
 app.use(express.json());
 
-import { Usuarios } from './controller/UsuarioController.js';7
-Usuarios(app)
+Usuarios(app, bd)
 
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
