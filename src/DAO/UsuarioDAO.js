@@ -1,7 +1,7 @@
 export default class UsuarioDAO {
   static listarUsuarios(bd) {
     return new Promise((resolve, reject) => {
-      bd.query('SELECT * FROM usuarios', (erro, linhas) => {
+      bd.all('SELECT * FROM usuarios', (erro, linhas) => {
         if (erro) {
           reject(erro);
         } else {
@@ -13,7 +13,7 @@ export default class UsuarioDAO {
 
   static listarUsuariosPorId(bd, id) {
     return new Promise((resolve, reject) => {
-      bd.query('SELECT * FROM usuarios WHERE id = ?', [id], (erro, linhas) => {
+      bd.get('SELECT * FROM usuarios WHERE id = ?', [id], (erro, linhas) => {
         if (erro) {
           reject(erro);
         } else {
