@@ -46,6 +46,13 @@ export default class UsuarioDAO {
     });
   }
 
+  /**
+   *
+   * @param {Database} bd - Instância do banco de dados.
+   * @param {Request.params.id} id - ID do usuário a ser atualizado.
+   * @param {Object} usuarioAtualizado - Objeto com dados do usuário atualizado.
+   * @returns {Promise} - Promise com o resultado da atualização.
+   */
   static atualizarUsuario(bd, id, usuarioAtualizado) {
     const { nome, email, senha, CPF } = usuarioAtualizado;
 
