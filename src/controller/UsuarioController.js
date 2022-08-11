@@ -1,4 +1,4 @@
-import  UsuarioDAO  from "../DAO/UsuarioDAO.js"
+import UsuarioDAO from "../DAO/UsuarioDAO.js"
 import { validacaoUsuario } from "../middleware/validacaoUsuario.js"
 
 export const Usuarios = (app, bd) => {
@@ -8,37 +8,37 @@ export const Usuarios = (app, bd) => {
     app.post('/usuarios', validacaoUsuario, (req, res) => {
         const usuario = req.body
         UsuarioDAO.adicionarUsuario(bd, usuario)
-            .then((success) => {
-                res.status(200).json(success)
-            })
-            .catch((erro) => {
-                res.status(500).json(erro)
-            })
+        try {
+            res.status(200).send('Usuário adicionado com sucesso!')
+        }
+        catch (erro) {
+            res.status(500).json(erro)
+        }
     })
 
     //READ
 
     app.get('/usuarios', (req, res) => {
         UsuarioDAO.listarUsuarios(bd)
-            .then((success) => {
-                success.senha = undefined
-                res.status(200).json(success)
-            })
-            .catch((erro) => {
-                res.status(500).json(erro)
-            })
-    }) 
+        try {
+            success.senha = undefined
+            res.status(200)
+        }
+        catch (erro) {
+            res.status(500).json(erro)
+        }
+    })
 
     app.get('/usuarios/:id', (req, res) => {
         const id = req.params.id
         UsuarioDAO.listarUsuariosPorId(bd, id)
-            .then((success) => {
-                success.senha = undefined
-                res.status(200).json(success)
-            })
-            .catch((erro) => {
-                res.status(500).json(erro)
-            })
+        try {
+            success.senha = undefined
+            res.status(200)
+        }
+        catch (erro) {
+            res.status(500).json(erro)
+        }
     })
 
     //UPDATE 
@@ -48,7 +48,7 @@ export const Usuarios = (app, bd) => {
         const usuarioAtualizado = req.body
         const usuarioBd = UsuarioDAO.listarUsuariosPorId(bd, id)
 
-        if(usuarioBd === undefined) {
+        if (usuarioBd === undefined) {
             res.status(404).send('O usuário especificado não foi encontrado.')
         }
 
@@ -56,21 +56,27 @@ export const Usuarios = (app, bd) => {
             await UsuarioDAO.atualizarUsuario(bd, id, usuarioAtualizado)
             res.status(200).send('Usuário atualizado com sucesso.')
         }
-        catch(error) {
+        catch (error) {
             res.status(500).json(error)
         }
     })
 
     //DELETE
 
-    app.delete('/usuarios/:id', (req, res) => {
+    app.delete('/usuarios/:id', async (req, res) => {
         const id = req.params.id
-        UsuarioDAO.deletarUsuario(bd, id)
-        .then((success) => {
-            res.status(200).json(success)
-        })
-        .catch((erro) => {
+        const usuarioBd = UsuarioDAO.listarUsuariosPorId(bd, id)
+
+        if (usuarioBd === undefined) {
+            res.status(404).send('O usuário especificado não foi encontrado.')
+        }
+
+        try {
+            await UsuarioDAO.deletarUsuario(bd, id)
+            res.status(200).send('Usuário deletado com sucesso.')
+        }
+        catch (erro) {
             res.status(500).json(erro)
-        })
+        }
     })
 }
