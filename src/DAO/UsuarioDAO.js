@@ -24,11 +24,6 @@ export default class UsuarioDAO {
     });
   }
 
-  /**
-   * @param {Database} bd - Instância do banco de dados.
-   * @param {Object} usuario - Objeto com dados do usuário
-   * @returns {Promise} - Promise com o resultado da inserção
-   */
   static adicionarUsuario(bd, usuario) {
     const { nome, email, senha, CPF } = usuario;
 
@@ -38,40 +33,33 @@ export default class UsuarioDAO {
         [nome, email, senha, CPF],
         erro => {
           if (!erro) {
-            resolve('Usuário adicionado com sucesso!');
+            return resolve('Usuário adicionado com sucesso!');
           }
 
           if (erro.message.includes('UNIQUE constraint failed')) {
             if (erro.message.includes('email')) {
-              reject('E-mail já cadastrado!');
+              return reject('E-mail já cadastrado!');
             } else if (erro.message.includes('CPF')) {
-              reject('CPF já cadastrado!');
+              return reject('CPF já cadastrado!');
             }
           }
 
-          reject(erro);
+          return reject(erro);
         }
       );
     });
   }
 
-  /**
-   *
-   * @param {Database} bd - Instância do banco de dados.
-   * @param {Request.params.id} id - ID do usuário a ser atualizado.
-   * @param {Object} usuarioAtualizado - Objeto com dados do usuário atualizado.
-   * @returns {Promise} - Promise com o resultado da atualização.
-   */
   static atualizarUsuario(bd, id, usuarioAtualizado) {
-    const { nome, email, senha, CPF } = usuarioAtualizado;
+    const { nome, senha } = usuarioAtualizado;
 
     return new Promise((resolve, reject) => {
       bd.run(
-        'UPDATE usuarios SET nome = ?, email = ?, senha = ?, CPF = ? WHERE id = ?',
-        [nome, email, senha, CPF, id],
+        'UPDATE usuarios SET nome = ?, senha = ?WHERE id = ?',
+        [nome, senha, id],
         erro => {
           if (erro) {
-            reject(erro);
+            reject(erro.message);
           } else {
             resolve('Usuário atualizado com sucesso!');
           }
