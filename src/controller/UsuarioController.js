@@ -43,16 +43,22 @@ export const Usuarios = (app, bd) => {
 
     //UPDATE 
 
-    app.patch('/usuarios/:id', (req, res) => {
+    app.patch('/usuarios/:id', async (req, res) => {
         const id = req.params.id
         const usuarioAtualizado = req.body
-        UsuarioDAO.atualizarUsuario(bd, id, usuarioAtualizado)
-        .then((success) => {
-            res.status(200).json(success)
-        })
-        .catch((erro) => {
-            res.status(500).json(erro)
-        })
+        const usuarioBd = UsuarioDAO.listarUsuariosPorId(bd, id)
+
+        if(usuarioBd === undefined) {
+            res.status(404).send('O usuário especificado não foi encontrado.')
+        }
+
+        try {
+            await UsuarioDAO.atualizarUsuario(bd, id, usuarioAtualizado)
+            res.status(200).send('Usuário atualizado com sucesso.')
+        }
+        catch(error) {
+            res.status(500).json(error)
+        }
     })
 
     //DELETE
