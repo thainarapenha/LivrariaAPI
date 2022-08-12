@@ -1,10 +1,10 @@
-import FuncionarioDAO from '../DAO/FuncionarioDAO.js';
-import FuncionarioModel from '../model/FuncionarioModel.js';
+import FuncionariosDAO from '../DAO/FuncionariosDAO.js';
+import FuncionariosModel from '../model/FuncionariosModel.js';
 
 export const Funcionarios = (app, bd) => {
   app.get('/funcionarios', async (_, response) => {
     try {
-      const funcionarios = await FuncionarioDAO.listaFuncionarios(bd);
+      const funcionarios = await FuncionariosDAO.listarFuncionarios(bd);
 
       if (!funcionarios) {
         response.status(404).send('Nenhum funcionário encontrado');
@@ -19,10 +19,10 @@ export const Funcionarios = (app, bd) => {
   app.get('/funcionarios/:id', async (request, response) => {
     try {
       const id = request.params.id;
-      const funcionario = await FuncionarioDAO.listaFuncionariosPorId(bd, id);
+      const funcionario = await FuncionariosDAO.listarFuncionariosPorID(bd, id);
 
       if (!funcionario) {
-        response.status(404).send('Funcionário não encontrado');
+        response.status(404).json({ erro: 'Funcionário não encontrado' });
       }
 
       response.status(200).json(funcionario);
@@ -32,20 +32,28 @@ export const Funcionarios = (app, bd) => {
   });
 
   app.post('/funcionarios', async (request, response) => {
-    const { CPF, nome, cargo, salario, status } = request.body;
-    const funcionario = new FuncionarioModel(CPF, nome, cargo, salario, status);
+    const { CPF, nome, cargo, salario, statusFuncionario } = request.body;
+    const funcionario = new FuncionariosModel(
+      CPF,
+      nome,
+      cargo,
+      salario,
+      statusFuncionario
+    );
 
     try {
-      await FuncionarioDAO.cadastraFuncionario(bd, funcionario);
-      response.status(201).json(funcionario);
+      await FuncionariosDAO.adicionarFuncionario(bd, funcionario);
+      response
+        .status(201)
+        .json({ message: 'Funcionário adicionado com sucesso' });
     } catch (erro) {
-      response.status(400).json({ error: erro.message });
+      response.status(400).json({ error: erro });
     }
   });
 
   app.patch('/funcionarios/:id', async (request, response) => {
     const id = request.params.id;
-    const funcionarioExiste = await FuncionarioDAO.listaFuncionariosPorId(
+    const funcionarioExiste = await FuncionariosDAO.listarFuncionariosPorID(
       bd,
       id
     );
@@ -54,17 +62,17 @@ export const Funcionarios = (app, bd) => {
       return response.status(404).json({ error: 'Funcionário não encontrado' });
     }
 
-    const { CPF, nome, cargo, salario, status } = request.body;
-    const funcionarioAtualizado = new FuncionarioModel(
+    const { CPF, nome, cargo, salario, statusFuncionario } = request.body;
+    const funcionarioAtualizado = new FuncionariosModel(
       CPF,
       nome,
       cargo,
       salario,
-      status
+      statusFuncionario
     );
 
     try {
-      await FuncionarioDAO.atualizaFuncionario(bd, id, funcionarioAtualizado);
+      await FuncionariosDAO.atualizarFuncionario(bd, id, funcionarioAtualizado);
       response.status(200).json('Funcinário atualizado com sucesso');
     } catch (erro) {
       response.status(400).json({ error: erro.message });
@@ -73,7 +81,7 @@ export const Funcionarios = (app, bd) => {
 
   app.delete('/funcionarios/:id', async (request, response) => {
     const id = request.params.id;
-    const funcionarioExiste = await FuncionarioDAO.listaFuncionariosPorId(
+    const funcionarioExiste = await FuncionariosDAO.listarFuncionariosPorID(
       bd,
       id
     );
@@ -83,7 +91,7 @@ export const Funcionarios = (app, bd) => {
     }
 
     try {
-      await FuncionarioDAO.deletaFuncionario(bd, id);
+      await FuncionariosDAO.deletarFuncionario(bd, id);
       response.status(200).json('Funcionário deletado com sucesso');
     } catch (erro) {
       response.status(400).json({ error: erro.message });
