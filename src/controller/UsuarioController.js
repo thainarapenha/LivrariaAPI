@@ -16,7 +16,7 @@ export const Usuarios = (app, bd) => {
       await UsuarioDAO.adicionarUsuario(bd, usuario);
       res.status(201).json(message.success);
     } catch (erro) {
-      res.status(400).json(message.error);
+      res.status(400).json({ error: erro.message });
     }
   });
 
@@ -24,9 +24,13 @@ export const Usuarios = (app, bd) => {
   app.get('/usuarios', async (req, res) => {
     try {
       const usuarios = await UsuarioDAO.listarUsuarios(bd);
-
+      const message = {
+        success: 'Nenhum usuário cadastrado!', 
+        error: false
+      }
+      
       if (!usuarios) {
-        return res.status(404).json('Nenhum usuário cadastrado!');
+        return res.status(404).json(message.success);
       }
 
       res.status(200).json(usuarios);
@@ -37,12 +41,16 @@ export const Usuarios = (app, bd) => {
 
   app.get('/usuarios/:id', async (req, res) => {
     const id = req.params.id;
+    const message = {
+      success: 'Usuário não existe!', 
+      error: false
+    }
 
     try {
       const usuario = await UsuarioDAO.listarUsuariosPorId(bd, id);
 
       if (!usuario) {
-        return res.status(404).json({ message: 'Usuário não existe!' });
+        return res.status(404).json(message.success);
       }
 
       res.status(200).json(usuario);
@@ -56,18 +64,26 @@ export const Usuarios = (app, bd) => {
     const id = req.params.id;
     const { nome, email, senha, CPF } = req.body;
     const usuarioAtualizado = new UsuarioModel(nome, email, senha, CPF);
+    const message = {
+      success: 'O usuário especificado não foi encontrado.',
+      error: false
+    }
+    const messageAtt = {
+      success: 'Usuário atualizado com sucesso.',
+      error: false
+    }
 
     const usuarioBd = await UsuarioDAO.listarUsuariosPorId(bd, id);
 
     if (!usuarioBd) {
       return res
         .status(404)
-        .json({ message: 'O usuário especificado não foi encontrado.' });
+        .json(message.success);
     }
 
     try {
       await UsuarioDAO.atualizarUsuario(bd, id, usuarioAtualizado);
-      res.status(200).json({ message: 'Usuário atualizado com sucesso.' });
+      res.status(200).json(messageAtt.success);
     } catch (error) {
       res.status(400).json({ error: erro.message });
     }
@@ -77,16 +93,24 @@ export const Usuarios = (app, bd) => {
   app.delete('/usuarios/:id', async (req, res) => {
     const id = req.params.id;
     const usuarioBd = await UsuarioDAO.listarUsuariosPorId(bd, id);
+    const message = {
+      success: 'O usuário especificado não foi encontrado.',
+      error: false
+    }
+    const messageDelete = {
+      success: 'Usuário deletado com sucesso.',
+      error: false
+    }
 
     if (!usuarioBd) {
       return res
         .status(404)
-        .json({ message: 'O usuário especificado não foi encontrado.' });
+        .json(message.success);
     }
 
     try {
       await UsuarioDAO.deletarUsuario(bd, id);
-      res.status(200).json({ message: 'Usuário deletado com sucesso.' });
+      res.status(200).json(messageDelete.success);
     } catch (erro) {
       res.status(400).json({ error: erro.message });
     }
