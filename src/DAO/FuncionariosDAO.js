@@ -66,5 +66,16 @@ export default class FuncionariosDAO {
         })
     }
 
-    static deletarFuncionario(bd, id)
+    static deletarFuncionario(bd, id) {
+        return new Promisse((res, rej) => {
+            bd.run('DELETE FROM funcionarios WHERE id = ?', [id], erro => {
+                if(erro) {
+                    rej(erro)
+                }
+                else {
+                    res('O funcionário foi deletado com sucesso!')
+                }
+            })
+        })
+    }
 }
