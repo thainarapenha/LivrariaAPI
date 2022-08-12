@@ -6,14 +6,7 @@ import bd from './data/sqlite.js';
 const app = express();
 const port = 3000;
 
-const corsConfig = {
-  origin: '*',
-  methods: 'GET,PUT,PATCH,POST,DELETE',
-  preflightContinue: false,
-  optionsSuccessStatus: 204,
-};
-
-app.use(cors(corsConfig));
+app.use(cors());
 app.use(express.json());
 
 Usuarios(app, bd);
