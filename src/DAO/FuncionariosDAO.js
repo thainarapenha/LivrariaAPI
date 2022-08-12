@@ -46,4 +46,10 @@ export default class FuncionariosDAO {
             })
         })
     }
+
+    static atualizarFuncionario(bd) {
+        return new Promisse((res, rej) => {
+            bd.run('UPDATE funcionarios SET nome = ?, cargo = ?, salario = ?, situacao = ? ')
+        })
+    }
 }
