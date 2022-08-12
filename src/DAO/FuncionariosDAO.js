@@ -1,5 +1,7 @@
 export default class FuncionariosDAO {
-    static adicionarFuncionario(bd) {
+    static adicionarFuncionario(bd, funcionario) {
+        const {CPF, nome, cargo, salario, situacao} = funcionario
+
         return new Promise = ((res, rej) => {
             bd.run(
                 'INSERT INTO funcionarios (CPF, nome, cargo, salario, situacao) VALUES (?, ?, ?, ?, ?)',
@@ -34,7 +36,7 @@ export default class FuncionariosDAO {
         })
     }
 
-    static listarFuncionariosPorID(bd) {
+    static listarFuncionariosPorID(bd, id) {
         new Promisse((res, rej) => {
             bd.get('SELECT * FROM funcionario WHERE id = ?', [id], (erro, linhas) => {
                 if (erro) {
@@ -47,7 +49,9 @@ export default class FuncionariosDAO {
         })
     }
 
-    static atualizarFuncionario(bd) {
+    static atualizarFuncionario(bd, funcionario) {
+        const { nome, cargo, salario, situacao } = funcionario
+
         return new Promisse((res, rej) => {
             bd.run('UPDATE funcionarios SET nome = ?, cargo = ?, salario = ?, situacao = ? WHERE id = ?',
             [nome, cargo, salario, situacao],
@@ -61,4 +65,6 @@ export default class FuncionariosDAO {
             })
         })
     }
+
+    static deletarFuncionario(bd, id)
 }
