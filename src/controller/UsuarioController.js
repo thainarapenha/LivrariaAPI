@@ -8,15 +8,15 @@ export const Usuarios = (app, bd) => {
     const { nome, email, senha, CPF } = req.body;
     const usuario = new UsuarioModel(nome, email, senha, CPF);
     const message = {
-      success:'Usuário adicionado com sucesso!',
-      error: false
-    }
+      success: 'Usuário adicionado com sucesso!',
+      error: false,
+    };
 
     try {
       await UsuarioDAO.adicionarUsuario(bd, usuario);
-      res.status(201).json(message.success);
+      res.status(201).json(message);
     } catch (erro) {
-      res.status(400).json({ error: erro.message });
+      res.status(400).json({ error: erro });
     }
   });
 
@@ -25,10 +25,10 @@ export const Usuarios = (app, bd) => {
     try {
       const usuarios = await UsuarioDAO.listarUsuarios(bd);
       const message = {
-        success: 'Nenhum usuário cadastrado!', 
-        error: false
-      }
-      
+        success: 'Nenhum usuário cadastrado!',
+        error: false,
+      };
+
       if (!usuarios) {
         return res.status(404).json(message.success);
       }
@@ -42,20 +42,21 @@ export const Usuarios = (app, bd) => {
   app.get('/usuarios/:id', async (req, res) => {
     const id = req.params.id;
     const message = {
-      success: 'Usuário não existe!', 
-      error: false
-    }
+      success: 'Usuário não existe!',
+      error: false,
+    };
 
     try {
       const usuario = await UsuarioDAO.listarUsuariosPorId(bd, id);
 
       if (!usuario) {
-        return res.status(404).json(message.success);
+        return res.status(404).json(message);
       }
 
+      usuario.senha = undefined;
       res.status(200).json(usuario);
     } catch (erro) {
-      res.status(500).json({ error: erro.message });
+      res.status(500).json({ error: erro });
     }
   });
 
@@ -66,26 +67,24 @@ export const Usuarios = (app, bd) => {
     const usuarioAtualizado = new UsuarioModel(nome, email, senha, CPF);
     const message = {
       success: 'O usuário especificado não foi encontrado.',
-      error: false
-    }
+      error: false,
+    };
     const messageAtt = {
       success: 'Usuário atualizado com sucesso.',
-      error: false
-    }
+      error: false,
+    };
 
     const usuarioBd = await UsuarioDAO.listarUsuariosPorId(bd, id);
 
     if (!usuarioBd) {
-      return res
-        .status(404)
-        .json(message.success);
+      return res.status(404).json(message);
     }
 
     try {
       await UsuarioDAO.atualizarUsuario(bd, id, usuarioAtualizado);
-      res.status(200).json(messageAtt.success);
-    } catch (error) {
-      res.status(400).json({ error: erro.message });
+      res.status(200).json(messageAtt);
+    } catch (erro) {
+      res.status(400).json({ error: erro });
     }
   });
 
@@ -95,24 +94,22 @@ export const Usuarios = (app, bd) => {
     const usuarioBd = await UsuarioDAO.listarUsuariosPorId(bd, id);
     const message = {
       success: 'O usuário especificado não foi encontrado.',
-      error: false
-    }
+      error: false,
+    };
     const messageDelete = {
       success: 'Usuário deletado com sucesso.',
-      error: false
-    }
+      error: false,
+    };
 
     if (!usuarioBd) {
-      return res
-        .status(404)
-        .json(message.success);
+      return res.status(404).json(message);
     }
 
     try {
       await UsuarioDAO.deletarUsuario(bd, id);
-      res.status(200).json(messageDelete.success);
+      res.status(200).json(messageDelete);
     } catch (erro) {
-      res.status(400).json({ error: erro.message });
+      res.status(400).json({ error: erro });
     }
   });
 };
