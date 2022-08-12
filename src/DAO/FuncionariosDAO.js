@@ -1,11 +1,11 @@
 export default class FuncionariosDAO {
     static adicionarFuncionario(bd, funcionario) {
-        const { CPF, nome, cargo, salario, situacao } = funcionario
+        const { CPF, nome, cargo, salario, statusFuncionario } = funcionario
 
         return new Promise = ((res, rej) => {
             bd.run(
-                'INSERT INTO funcionarios (CPF, nome, cargo, salario, situacao) VALUES (?, ?, ?, ?, ?)',
-                [CPF, nome, cargo, salario, situacao],
+                'INSERT INTO funcionarios (CPF, nome, cargo, salario, statusFuncionario) VALUES (?, ?, ?, ?, ?)',
+                [CPF, nome, cargo, salario, statusFuncionario],
                 erro => {
                     if (!erro) {
                         return res('Novo funcionário adicionado com sucesso.')
@@ -50,11 +50,11 @@ export default class FuncionariosDAO {
     }
 
     static atualizarFuncionario(bd, funcionario) {
-        const { nome, cargo, salario, situacao } = funcionario
+        const { nome, cargo, salario, statusFuncionario } = funcionario
 
         return new Promisse((res, rej) => {
-            bd.run('UPDATE funcionarios SET nome = ?, cargo = ?, salario = ?, situacao = ? WHERE id = ?',
-                [nome, cargo, salario, situacao],
+            bd.run('UPDATE funcionarios SET nome = ?, cargo = ?, salario = ?, statusFuncionario = ? WHERE id = ?',
+                [nome, cargo, salario, statusFuncionario],
                 erro => {
                     if (erro) {
                         rej(erro.message)
