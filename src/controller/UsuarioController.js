@@ -7,12 +7,16 @@ export const Usuarios = (app, bd) => {
   app.post('/usuarios', validacaoUsuario, async (req, res) => {
     const { nome, email, senha, CPF } = req.body;
     const usuario = new UsuarioModel(nome, email, senha, CPF);
+    const message = {
+      success:'Usuário adicionado com sucesso!',
+      error: false
+    }
 
     try {
       await UsuarioDAO.adicionarUsuario(bd, usuario);
-      res.status(201).send({ message: 'Usuário adicionado com sucesso!' });
+      res.status(201).json(message.success);
     } catch (erro) {
-      res.status(400).json({ error: erro.message });
+      res.status(400).json(message.error);
     }
   });
 
