@@ -1,6 +1,6 @@
 export default class FuncionariosDAO {
     static adicionarFuncionario(bd, funcionario) {
-        const {CPF, nome, cargo, salario, situacao} = funcionario
+        const { CPF, nome, cargo, salario, situacao } = funcionario
 
         return new Promise = ((res, rej) => {
             bd.run(
@@ -54,22 +54,22 @@ export default class FuncionariosDAO {
 
         return new Promisse((res, rej) => {
             bd.run('UPDATE funcionarios SET nome = ?, cargo = ?, salario = ?, situacao = ? WHERE id = ?',
-            [nome, cargo, salario, situacao],
-            erro => {
-                if(erro) {
-                    rej(erro.message)
-                } 
-                else {
-                    res('Os dados do funcionário foram atualizados!')
-                }
-            })
+                [nome, cargo, salario, situacao],
+                erro => {
+                    if (erro) {
+                        rej(erro.message)
+                    }
+                    else {
+                        res('Os dados do funcionário foram atualizados!')
+                    }
+                })
         })
     }
 
     static deletarFuncionario(bd, id) {
         return new Promisse((res, rej) => {
             bd.run('DELETE FROM funcionarios WHERE id = ?', [id], erro => {
-                if(erro) {
+                if (erro) {
                     rej(erro)
                 }
                 else {
