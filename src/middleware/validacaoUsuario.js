@@ -39,4 +39,4 @@ const validaEmail = email => {
   return regexValidaEmail.test(email);
 };
 
-export { validacaoUsuario };
+export { validacaoUsuario, validaCPF };
