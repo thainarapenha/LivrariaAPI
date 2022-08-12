@@ -25,7 +25,7 @@ export const Usuarios = (app, bd) => {
         return res.status(404).json('Nenhum usuário cadastrado!');
       }
 
-      res.status(200).json({ usuarios });
+      res.status(200).json(usuarios);
     } catch (erro) {
       res.status(400).json({ error: erro.message });
     }
@@ -56,7 +56,9 @@ export const Usuarios = (app, bd) => {
     const usuarioBd = await UsuarioDAO.listarUsuariosPorId(bd, id);
 
     if (!usuarioBd) {
-      return res.status(404).json({ message: 'O usuário especificado não foi encontrado.' });
+      return res
+        .status(404)
+        .json({ message: 'O usuário especificado não foi encontrado.' });
     }
 
     try {
@@ -73,7 +75,9 @@ export const Usuarios = (app, bd) => {
     const usuarioBd = await UsuarioDAO.listarUsuariosPorId(bd, id);
 
     if (!usuarioBd) {
-      return res.status(404).json({ message: 'O usuário especificado não foi encontrado.' });
+      return res
+        .status(404)
+        .json({ message: 'O usuário especificado não foi encontrado.' });
     }
 
     try {
