@@ -35,30 +35,30 @@ export default class LivroDAO {
           [titulo, descricao, categoria, url_img, preco, total_paginas, ano_publicacao, autor], //params
             erro => {
             if (!erro) {
-             return resolve("Livro cadastrado com sucesso")
+              resolve("Livro cadastrado com sucesso")
             } else {
-              return reject(erro.message);
+              reject(erro.message);
             }
           });
         });
       }
 
-      static atualizarLivro(bd, id_livro, livroAtualizado) {
-        const { titulo, descricao, categoria, url_img, preco, total_paginas, ano_publicacao, autor} = livroAtualizado;
-        return new Promise((resolve, reject) => {
-          bd.run(
-            'UPDATE livros SET titulo = ?, descricao = ?, categoria = ?, url_img = ?, preco = ?, total_paginas = ?, ano_publicacao = ?, autor = ? WHERE id_livro = ?',
-            [titulo, descricao, categoria, url_img, preco, total_paginas, ano_publicacao, autor, id_livro],
-            erro => {
-              if (erro) {
-                reject(erro.message);
-              } else {
-                resolve('Usuário atualizado com sucesso!');
-              }
-            }
-          );
-        });
-      }
+       static atualizarLivro(bd, id_livro, livroAtualizado) {
+         const { titulo, descricao, categoria, url_img, preco, total_paginas, ano_publicacao, autor} = livroAtualizado;
+         return new Promise((resolve, reject) => {
+           bd.run(
+             'UPDATE livros SET titulo = ?, descricao = ?, categoria = ?, url_img = ?, preco = ?, total_paginas = ?, ano_publicacao = ?, autor = ? WHERE id_livro = ?',
+             [titulo, descricao, categoria, url_img, preco, total_paginas, ano_publicacao, autor, id_livro],
+             erro => {
+               if (erro) {
+                 reject(erro);
+               } else {
+                 resolve('Usuário atualizado com sucesso!');
+               }
+             }
+           );
+         });
+      x }
     
 
 
