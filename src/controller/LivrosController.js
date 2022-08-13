@@ -68,4 +68,27 @@ export const Livros = app => {
         });
       
 
-}
+ //DELETE
+     app.delete('/livros/:id', async (req,res) => { 
+        const id_livro = req.params.id;
+        const livroExiste = await LivroDAO.listarLivrosPorId(bd,id_livro)
+        const message ={
+            success: "O livro especificado não encontrado",
+            error: false,
+        }
+        const messageDelete ={
+            success: "Livro deletado com sucesso",
+            error: false,
+        }
+        if(!livroExiste){
+            return res.status(404).json(message.success)
+        }
+        try{ 
+            await LivroDAO.deletarLivro(bd,id_livro)
+            res.status(200).json(messageDelete.sucess)
+        }catch(erro){
+            res.status(400).json({error: erro.message });
+        }
+     })
+} 
+    
