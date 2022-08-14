@@ -1,7 +1,7 @@
 import LivroDAO from "../DAO/LivrosDAO.js"
 import bd from "../data/sqlite.js"
 import LivrosModel from "../model/LivrosModel.js"
-
+import validacaoLivro from "../middleware/validaçãoLivros.js"
 export const Livros = app => {
 
     //READ 
@@ -26,7 +26,7 @@ export const Livros = app => {
     })
 
     //CREATE 
-    app.post('/livros', async (req, res) => {
+    app.post('/livros', validacaoLivro, async (req, res) => {
         const { titulo, descricao, categoria, url_img, preco, total_paginas, ano_publicacao, autor } = req.body
         const livro = new LivrosModel(titulo, descricao, categoria, url_img, preco, total_paginas, ano_publicacao, autor)
         const message = {
