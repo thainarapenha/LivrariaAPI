@@ -13,6 +13,17 @@ export const Estoque = (app, bd) => {
         })
     })
 
+    //READ for Id
+    app.get('/estoque/:id', (req, res) => {
+        const id_estoque = req.params.id
+        EstoqueDAO.listarEstoquePorId(bd, id_estoque)
+            .then((success) => {
+                res.status(200).json(success)
+            }).catch((error) => {
+                res.status(400).json(error)
+            })
+    })
+
     //CREATE
     app.post('/estoque', async(req, res) => {
         const {nome_fornecedor, CNPJ, qnt_livros, lote, nome_obra, preco_lote} = req.body;
@@ -51,9 +62,9 @@ export const Estoque = (app, bd) => {
             try {
                 await EstoqueDAO.atualizarEstoque(bd, id_estoque, estoqueAtualizado); // parametros chamados
                 res.status(200).json(messageAtt.success);
-              } catch (erro) {
+            } catch (erro) {
                 res.status(400).json({ error: erro.message });
-              }
+            }
     });
 
     //DELETE
