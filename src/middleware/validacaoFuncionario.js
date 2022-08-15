@@ -1,4 +1,4 @@
-import { validaCPF } from '../middleware/valicaoUsuario.js';
+import { validaCPF } from './validacaoUsuario.js';
 
 export function validaFuncionario(request, response, next) {
   let { CPF, nome, cargo, salario, statusFuncionario } = request.body;

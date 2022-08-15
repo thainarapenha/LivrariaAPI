@@ -12,7 +12,7 @@ const port = 3000;
 app.use(cors());
 app.use(express.json());
 
-Estoque.use(app, bd);
+Estoque(app, bd);
 Livros(app, bd);
 Usuarios(app, bd);
 Funcionarios(app, bd);
