@@ -23,10 +23,20 @@
 <!--te-->
 
 # Rotas da API 
+> ### As rotas são acessada através do  http://localhost:3000/_nome-rota_
 
 ## Livros 📚
 
-Acessar pela rota: http://localhost:3000/livros
+
+| Métodos       | Rotas             | Descrição   |
+| ------------- |:---------------:  |:-----------:|
+| GET           | /livros           | Retorna tabela inteira de livros      
+| GET           | /livros/*id*     | Retorna livro especificado por id 
+| POST          | /livros           | Cria um novo livro na tabela          
+| PATCH         | /livros/*id*     | Atualiza um livro especificado por id 
+| DELETE        | /livros/*id*     | Deleta um livro especificado por id  
+
+Acessar livros pela rota: http://localhost:3000/livros
 
 Modelo do corpo da requisição: 
 ````
@@ -57,7 +67,16 @@ Exemplo:
 
 ## Usuários 🙂
 
-Acessar pela rota: http://localhost:3000/usuarios
+| Métodos       | Rotas               | Descrição   |
+| ------------- |:---------------:    |:-----------:|
+| GET           | /usuarios           | Retorna tabela inteira de usuarios      
+| GET           | /usuarios/*id*     | Retorna usuario especificado por id 
+| POST          | /usuarios           | Cria um novo usuario na tabela      
+| PATCH         | /usuarios/*id*     | Atualiza um usuario especificado por id 
+| DELETE        | /usuarios/*id*     | Deleta um usuario especificado por id
+
+
+Acessar usuarios pela rota: http://localhost:3000/usuarios
 
 Modelo do corpo da requisição: 
 ````
@@ -79,6 +98,16 @@ Exemplo:
 ````
 
 ## Funcionários 💼
+
+
+| Métodos       | Rotas                 | Descrição   |
+| ------------- |:---------------:      |:-----------:|
+| GET           | /funcionarios         | Retorna tabela inteira de funcionarios    
+| GET           | /funcionarios/*id*     | Retorna funcionario especificado por id 
+| POST          | /funcionarios         | Cria um novo funcionario na tabela      
+| PATCH         | /funcionarios/*id*     | Atualiza um funcionario especificado por id 
+| DELETE        | /funcionarios/*id*     | Deleta um funcionario especificado por id
+
 
 Acessar pela rota: http://localhost:3000/funcionarios
 
@@ -104,6 +133,17 @@ Exemplo:
 ````
 
 ## Estoque 📦
+
+| Métodos       | Rotas                 | Descrição   |
+| ------------- |:--------------------: |:-----------:|
+| GET           | /estoque              | Retorna tabela inteira de estoque    
+| GET           | /estoque/*id*          | Retorna estoque o especificado por id 
+| POST          | /estoque              | Cria um novo estoque na tabela      
+| PATCH         | /estoque/*id*         | Atualiza um estoque especificado por id 
+| DELETE        | /estoque/*id*          | Deleta um estoque especificado por id
+
+
+
 
 Acessar pela rota: http://localhost:3000/estoque
 
