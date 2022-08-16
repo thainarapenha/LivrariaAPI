@@ -42,3 +42,6 @@ npm run dev
 
 ## (numero)Tecnologias utilizadas para desenvolver a API REST 
 -- imagem logo express, imagem logo node, imagem logo javascript 
+
+#### Livraria API :round_pushpin: Em andamento... :clock1030:
+-- imagem logo express, imagem logo node, imagem logo javascript 
