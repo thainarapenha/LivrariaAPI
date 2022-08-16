@@ -44,3 +44,4 @@ npm run dev
 -- imagem logo express, imagem logo node, imagem logo javascript 
 
 #### Livraria API :round_pushpin: Em andamento... :clock1030:
+-- imagem logo express, imagem logo node, imagem logo javascript 
