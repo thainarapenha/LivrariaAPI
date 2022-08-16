@@ -124,7 +124,7 @@ Exemplo:
     "nome_fornecedor": "Alta Books",
     "CNPJ": "12345678900",
     "qnt_livros": "186",
-    "lote": "0000014",
+    "lote": "02154878787841IF",
     "nome_obra": "Código limpo: Habilidades práticas do agile software",
     "preco_lote": "8.000,00"
 }
