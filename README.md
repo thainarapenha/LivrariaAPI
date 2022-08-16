@@ -8,38 +8,41 @@
 ![express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
 ![Node.js](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+
 <!--ts-->
-   - [Descrição](#descricao)
-   - [Tabela de Conteúdo](#tabela-de-conteudo)
-   - [Rotas da API](#rotas-da-api)
-    - [Livros](#Livros)
-    - [Usuários](#rotas-usuarios)
-    - [Funcionários](#rotas-funcionarios)
-    - [Estoque](#rotas-estoque)
-   * [Como executar o projeto?](#como-executar-o-projeto)
-    * [Requisitos](#Requisitos-dependências)
-    * [Instalação das dependências](#instalacao)
-   * [Desenvolvedores](#desenvolvedores)
+
+- [Descrição](#descricao)
+- [Tabela de Conteúdo](#tabela-de-conteudo)
+- [Rotas da API](#rotas-da-api)
+- [Livros](#Livros)
+- [Usuários](#rotas-usuarios)
+- [Funcionários](#rotas-funcionarios)
+- [Estoque](#rotas-estoque)
+- [Como executar o projeto?](#como-executar-o-projeto)
+- [Requisitos](#Requisitos-dependências)
+- [Instalação das dependências](#instalacao)
+- [Desenvolvedores](#desenvolvedores)
 <!--te-->
 
-# Rotas da API 
-> ### As rotas são acessada através do  http://localhost:3000/_nome-rota_
+# Rotas da API
+
+> ### As rotas são acessada através do http://localhost:3000/_nome-rota_
 
 ## Livros 📚
 
-
-| Métodos       | Rotas             | Descrição   |
-| ------------- |:---------------:  |:-----------:|
-| GET           | /livros           | Retorna tabela inteira de livros      
-| GET           | /livros/*id*     | Retorna livro especificado por id 
-| POST          | /livros           | Cria um novo livro na tabela          
-| PATCH         | /livros/*id*     | Atualiza um livro especificado por id 
-| DELETE        | /livros/*id*     | Deleta um livro especificado por id  
+| Métodos |    Rotas     |               Descrição               |
+| ------- | :----------: | :-----------------------------------: |
+| GET     |   /livros    |   Retorna tabela inteira de livros    |
+| GET     | /livros/_id_ |   Retorna livro especificado por id   |
+| POST    |   /livros    |     Cria um novo livro na tabela      |
+| PATCH   | /livros/_id_ | Atualiza um livro especificado por id |
+| DELETE  | /livros/_id_ |  Deleta um livro especificado por id  |
 
 Acessar livros pela rota: http://localhost:3000/livros
 
-Modelo do corpo da requisição: 
-````
+Modelo do corpo da requisição:
+
+```
 {
     "titulo": "título do livro",
     "descricao": "descrição do livro",
@@ -63,23 +66,23 @@ Exemplo:
     "ano_publicacao": "2009",
     "autor": "Robert C. Martin"
 }
-````
+```
 
 ## Usuários 🙂
 
-| Métodos       | Rotas               | Descrição   |
-| ------------- |:---------------:    |:-----------:|
-| GET           | /usuarios           | Retorna tabela inteira de usuarios      
-| GET           | /usuarios/*id*     | Retorna usuario especificado por id 
-| POST          | /usuarios           | Cria um novo usuario na tabela      
-| PATCH         | /usuarios/*id*     | Atualiza um usuario especificado por id 
-| DELETE        | /usuarios/*id*     | Deleta um usuario especificado por id
-
+| Métodos |     Rotas      |                Descrição                |
+| ------- | :------------: | :-------------------------------------: |
+| GET     |   /usuarios    |   Retorna tabela inteira de usuarios    |
+| GET     | /usuarios/_id_ |   Retorna usuario especificado por id   |
+| POST    |   /usuarios    |     Cria um novo usuario na tabela      |
+| PATCH   | /usuarios/_id_ | Atualiza um usuario especificado por id |
+| DELETE  | /usuarios/_id_ |  Deleta um usuario especificado por id  |
 
 Acessar usuarios pela rota: http://localhost:3000/usuarios
 
-Modelo do corpo da requisição: 
-````
+Modelo do corpo da requisição:
+
+```
 {
     "CPF": "cpf do usuário",
     "nome": "nome do usuário",
@@ -95,24 +98,23 @@ Exemplo:
     "email": "maria.augusta@gmail.com",
     "senha": "123456"
 }
-````
+```
 
 ## Funcionários 💼
 
-
-| Métodos       | Rotas                 | Descrição   |
-| ------------- |:---------------:      |:-----------:|
-| GET           | /funcionarios         | Retorna tabela inteira de funcionarios    
-| GET           | /funcionarios/*id*     | Retorna funcionario especificado por id 
-| POST          | /funcionarios         | Cria um novo funcionario na tabela      
-| PATCH         | /funcionarios/*id*     | Atualiza um funcionario especificado por id 
-| DELETE        | /funcionarios/*id*     | Deleta um funcionario especificado por id
-
+| Métodos |       Rotas        |                  Descrição                  |
+| ------- | :----------------: | :-----------------------------------------: |
+| GET     |   /funcionarios    |   Retorna tabela inteira de funcionarios    |
+| GET     | /funcionarios/_id_ |   Retorna funcionario especificado por id   |
+| POST    |   /funcionarios    |     Cria um novo funcionario na tabela      |
+| PATCH   | /funcionarios/_id_ | Atualiza um funcionario especificado por id |
+| DELETE  | /funcionarios/_id_ |  Deleta um funcionario especificado por id  |
 
 Acessar pela rota: http://localhost:3000/funcionarios
 
-Modelo do corpo da requisição: 
-````
+Modelo do corpo da requisição:
+
+```
 {
     "CPF": "cpf do funcionário",
     "nome": "nome do funcionário",
@@ -130,25 +132,23 @@ Exemplo:
     "salário: "2.500",
     "statusFuncionario": "Férias"
 }
-````
+```
 
 ## Estoque 📦
 
-| Métodos       | Rotas                 | Descrição   |
-| ------------- |:--------------------: |:-----------:|
-| GET           | /estoque              | Retorna tabela inteira de estoque    
-| GET           | /estoque/*id*          | Retorna estoque o especificado por id 
-| POST          | /estoque              | Cria um novo estoque na tabela      
-| PATCH         | /estoque/*id*         | Atualiza um estoque especificado por id 
-| DELETE        | /estoque/*id*          | Deleta um estoque especificado por id
-
-
-
+| Métodos |     Rotas     |                Descrição                |
+| ------- | :-----------: | :-------------------------------------: |
+| GET     |   /estoque    |    Retorna tabela inteira de estoque    |
+| GET     | /estoque/_id_ |  Retorna estoque o especificado por id  |
+| POST    |   /estoque    |     Cria um novo estoque na tabela      |
+| PATCH   | /estoque/_id_ | Atualiza um estoque especificado por id |
+| DELETE  | /estoque/_id_ |  Deleta um estoque especificado por id  |
 
 Acessar pela rota: http://localhost:3000/estoque
 
-Modelo do corpo da requisição: 
-````
+Modelo do corpo da requisição:
+
+```
 {
     "nome_fornecedor": "nome do fornecedor",
     "CNPJ": "CNPJ do fornecedor",
@@ -158,7 +158,7 @@ Modelo do corpo da requisição:
     "preco_lote": "preço do lote"
 }
 
-Exemplo: 
+Exemplo:
 
 {
     "nome_fornecedor": "Alta Books",
@@ -168,40 +168,51 @@ Exemplo:
     "nome_obra": "Código limpo: Habilidades práticas do agile software",
     "preco_lote": "8.000,00"
 }
-````
+```
 
 # Como executar o projeto? 🤔
 
-## 1.0 Requisitos para rodar localmente 💻 
+## 1.0 Requisitos para rodar localmente 💻
 
 Ferramentas **necessárias** para executar a API localmente:
 
 <!--ts-->
-   * [VsCode](https://code.visualstudio.com/download) ou outro editor de preferência
-   * [Node.js](https://nodejs.org/en/download/) instalado na máquina
-   * [Postman](https://www.postman.com/downloads/), [Insomnia](https://insomnia.rest/download) ou semelhante.
+
+- [VsCode](https://code.visualstudio.com/download) ou outro editor de preferência
+- [Node.js](https://nodejs.org/en/download/) instalado na máquina
+- [Postman](https://www.postman.com/downloads/), [Insomnia](https://insomnia.rest/download) ou semelhante.
 <!--te-->
 
 ### 1.1 Instalando as dependências 🛠️
 
+#### 1.1.1 Clone este repositório _localmente_ em sua máquina
 
-#### 1.1.1 Clone  este repositório _localmente_ em sua máquina
+```
+git clone git@github.com:thainarapenha/LivrariaAPI.git
+```
 
-#### 1.1.2 Execute o seguinte comando para instalar as dependências do projeto: 
+### 1.1.2 Entre na pasta do projeto
+
+```
+cd LivrariaAPI
+```
+
+#### 1.1.3 Execute o seguinte comando para instalar as dependências do projeto:
 
 ```
 npm install
 ```
 
-#### 1.1.3 Execute o seguinte script para rodar o servidor: 
+#### 1.1.4 Execute o seguinte script para rodar o servidor:
 
 ```
 npm run dev
 ```
-#### 1.1.4 Abra o Insomnia e execute a rotas especificadas 
 
+#### 1.1.5 Abra o Insomnia e execute a rotas especificadas 💻👌
 
 ## Desenvolvedores(as) 👨‍💻
+
 <table>
     <th>
       <a href="https://github.com/thainarapenha">
@@ -256,4 +267,3 @@ npm run dev
       </a>
     </th>
     </table>
-
