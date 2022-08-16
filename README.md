@@ -200,6 +200,7 @@ npm run dev
 ```
 #### 1.1.4 Abra o Insomnia e execute a rotas especificadas 
 
+
 ## Desenvolvedores(as) 👨‍💻
 <table>
     <th>
@@ -255,7 +256,4 @@ npm run dev
       </a>
     </th>
     </table>
-
-
-
 
