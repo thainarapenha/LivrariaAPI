@@ -9,13 +9,13 @@
 ![Node.js](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 <!--ts-->
-   * [Descrição](#descricao)
-   * [Tabela de Conteúdo](#tabela-de-conteudo)
-   * [Rotas da API](#rotas-da-api)
-    * [Livros](#Livros)
-    * [Usuários](#rotas-usuarios)
-    * [Funcionários](#rotas-funcionarios)
-    * [Estoque](#rotas-estoque)
+   - [Descrição](#descricao)
+   - [Tabela de Conteúdo](#tabela-de-conteudo)
+   - [Rotas da API](#rotas-da-api)
+    - [Livros](#Livros)
+    - [Usuários](#rotas-usuarios)
+    - [Funcionários](#rotas-funcionarios)
+    - [Estoque](#rotas-estoque)
    * [Como executar o projeto?](#como-executar-o-projeto)
     * [Requisitos](#Requisitos-dependências)
     * [Instalação das dependências](#instalacao)
@@ -26,46 +26,109 @@
 
 ## Livros 📚
 
-| Métodos       | Rotas           | Descrição   |
-| ------------- |:---------------:|:-----------:|
-| GET           | /livros           | Retorna tabela inteira de livros      
-| GET           | /livros/:*id*     | Retorna livro especificado por id 
-| POST          | /livros           | Cria um novo livro na tabela          
-| PATCH         | /livros/:*id*     | Atualiza um livro especificado por id 
-| DELETE        | /livros/:*id*     | Deleta um livro especificado por id  
+Acessar pela rota: http://localhost:3000/livros
+
+Modelo do corpo da requisição: 
+````
+{
+    "titulo": "título do livro",
+    "descricao": "descrição do livro",
+    "categoria": "categoria do livro",
+    "url_image": "URL da imagem do livro",
+    "preco": "preço do livro",
+    "total_paginas": "quantidade de páginas do livro",
+    "ano_publicacao": "ano da publicação do livro",
+    "autor": "autor do livro"
+}
+
+Exemplo:
+
+{
+    "titulo": "Código limpo: Habilidades práticas do Agile Software",
+    "descricao": "Mesmo um código ruim pode funcionar. Mas se ele não for limpo, pode acabar com uma empresa de desenvolvimento. Perdem-se a cada ano [...]",
+    "categoria": "Programação",
+    "url_image": "https://images-na.ssl-images-amazon.com/images/I/4153E2zZmTS._SX350_BO1,204,203,200_.jpg",
+    "preco": "69.99",
+    "total_paginas": "425",
+    "ano_publicacao": "2009",
+    "autor": "Robert C. Martin"
+}
+````
 
 ## Usuários 🙂
 
-| Métodos       | Rotas           | Descrição   |
-| ------------- |:---------------:|:-----------:|
-| GET           | /usuarios         | Retorna tabela inteira de usuarios  
-| GET           | /usuarios/:id     | Retorna usuarios especificado por id 
-| POST          | /usuarios         | Cria um novo usuarios na tabela      
-| PATCH         | /usuarios/:id     | Atualiza um usuarios especificado por id 
-| DELETE        | /usuarios/:id     | Deleta um usuarios especificado por id
+Acessar pela rota: http://localhost:3000/usuarios
 
+Modelo do corpo da requisição: 
+````
+{
+    "CPF": "cpf do usuário",
+    "nome": "nome do usuário",
+    "email": "email do usuário",
+    "senha": "senha do usuário"
+}
+
+Exemplo:
+
+{
+    "CPF": "12345678900",
+    "nome": "Maria Augusta",
+    "email": "maria.augusta@gmail.com",
+    "senha": "123456"
+}
+````
 
 ## Funcionários 💼
 
-| Métodos       | Rotas                 | Descrição   |
-| ------------- |:---------------:      |:-----------:|
-| GET           | /funcionarios         | Retorna tabela inteira de funcionarios  
-| GET           | /funcionarios/:id     | Retorna funcionarios especificado por id 
-| POST          | /funcionarios         | Cria um novo funcionarios na tabela     
-| PATCH         | /funcionarios/:id     | Atualiza um funcionarios especificado por id
-| DELETE        | /funcionarios/:id     | Deleta um funcionarios especificado por id
+Acessar pela rota: http://localhost:3000/funcionarios
+
+Modelo do corpo da requisição: 
+````
+{
+    "CPF": "cpf do funcionário",
+    "nome": "nome do funcionário",
+    "cargo": "cargo do funcionário",
+    "salario": "salário do funcionário",
+    "statusFuncionario": "informa se está trabalhando ou de férias"
+}
+
+Exemplo:
+
+{
+    "CPF": "12345678900",
+    "nome": "João da Silva",
+    "cargo": "Gerente de vendas",
+    "salário: "2.500",
+    "statusFuncionario": "Férias"
+}
+````
 
 ## Estoque 📦
 
-| Métodos       | Rotas             | Descrição   |
-| ------------- |:----------------: |:-----------:|
-| GET           | /estoque          | Retorna tabela inteira de estoque
-| GET           | /estoque/:id      | Retorna estoque especificado por id 
-| POST          | /estoque          | Cria um novo estoque na tabela       
-| PATCH         | /estoque/:id      | Atualiza um estoque especificado por id
-| DELETE        | /estoque/:id      | Deleta um estoque especificado por id
+Acessar pela rota: http://localhost:3000/estoque
 
+Modelo do corpo da requisição: 
+````
+{
+    "nome_fornecedor": "nome do fornecedor",
+    "CNPJ": "CNPJ do fornecedor",
+    "qnt_livros": "quantidade de livros",
+    "lote": "número do lote",
+    "nome_obra": "nome da obra",
+    "preco_lote": "preço do lote"
+}
 
+Exemplo: 
+
+{
+    "nome_fornecedor": "Alta Books",
+    "CNPJ": "12345678900",
+    "qnt_livros": "186",
+    "lote": "0000014",
+    "nome_obra": "Código limpo: Habilidades práticas do agile software",
+    "preco_lote": "8.000,00"
+}
+````
 
 # Como executar o projeto? 🤔
 
