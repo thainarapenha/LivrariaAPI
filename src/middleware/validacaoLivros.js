@@ -1,4 +1,4 @@
-function validacaoLivro(req, res, next) {
+export default function validacaoLivro(req, res, next) {
   if (Object.keys(req.body).length < 8) {
     return res
       .status(400)
@@ -16,4 +16,3 @@ function validacaoLivro(req, res, next) {
   return next();
 }
 
-export default validacaoLivro;

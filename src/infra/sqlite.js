@@ -1,6 +1,6 @@
 import sqlite3 from 'sqlite3';
 
-const bd = new sqlite3.Database('./src/data/database.db', erro => {
+const bd = new sqlite3.Database('./src/infra/database.db', erro => {
   if (erro) {
     console.log(erro);
   } else {

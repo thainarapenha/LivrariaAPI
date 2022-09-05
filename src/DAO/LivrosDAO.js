@@ -1,4 +1,4 @@
-import { database } from '../data/database.js';
+import { database } from '../infra/database.js';
 
 export default class LivrosDAO {
   static listarLivros() {
