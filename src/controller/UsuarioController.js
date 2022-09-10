@@ -1,4 +1,4 @@
-import UsuarioDAO from '../DAO/UsuarioDAO.js';
+import UsuarioDAO from '../dao/UsuarioDAO.js';
 import { validacaoUsuario } from '../middleware/validacaoUsuario.js';
 import UsuarioModel from '../model/UsuarioModel.js';
 

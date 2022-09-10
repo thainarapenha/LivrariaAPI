@@ -1,4 +1,4 @@
-import LivroDAO from '../DAO/LivrosDAO.js';
+import LivroDAO from '../dao/LivrosDAO.js';
 import LivrosModel from '../model/LivrosModel.js';
 
 async function listarLivros(_, response) {
@@ -73,11 +73,10 @@ async function deletarLivro(request, response) {
   }
 }
 
-
 export default {
   listarLivros,
   listarLivroPorId,
   adicionarLivro,
   atualizarLivro,
-  deletarLivro
-}
+  deletarLivro,
+};
