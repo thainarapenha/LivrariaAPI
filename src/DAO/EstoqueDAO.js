@@ -1,90 +1,29 @@
+import { database } from '../infra/database.js';
+
 export default class EstoqueDAO {
-    //métodos
-    static listarEstoque(bd) {
-        return new Promise((resolve, reject) => {
-            bd.all('SELECT * FROM estoque', (erro, linhas) => {
-                if (erro) {
-                    console.log(erro);
-                    reject(erro);
-                } else {
-                    resolve(linhas);
-                }
-            });
-        });
-    }
+  static listarEstoque() {
+    return database.query('SELECT * FROM estoque');
+  }
 
-    static listarEstoquePorId(bd, id_estoque) {
+  static listarEstoquePorId(id) {
+    return database.query('SELECT * FROM estoque WHERE id = $1', [id]);
+  }
 
-        return new Promise((resolve, reject) => {
-            bd.get(
-                'SELECT * FROM estoque WHERE id_estoque = ?',
-                [id_estoque],
-                (erro, linhas) => {
-                    if (!erro) {
-                        resolve(linhas);
-                    } else {
-                        reject(erro);
-                    }
-                }
-            );
-        });
-    }
+  static adicionarEstoque(dadosEstoque) {
+    const query =
+      'INSERT INTO estoque (nome_fornecedor, CNPJ, qnt_livros, lote, nome_obra, preco_lote) VALUES ($1, $2, $3, $4, $5, $6)';
 
-    static adicionarEstoque(bd, estoque) {
-        const { nome_fornecedor, CNPJ, qnt_livros, lote, nome_obra, preco_lote } =
-            estoque;
+    return database.query(query, Object.values(dadosEstoque));
+  }
 
-        return new Promise((resolve, reject) => {
-            bd.run(
-                'INSERT INTO estoque (nome_fornecedor, CNPJ, qnt_livros, lote, nome_obra, preco_lote) VALUES (?, ?, ?, ?, ?, ?)',
-                [nome_fornecedor, CNPJ, qnt_livros, lote, nome_obra, preco_lote],
-                erro => {
-                    if (!erro) {
-                        resolve('Estoque cadastrado com sucesso');
-                    } else {
-                        reject(erro.message);
-                    }
-                }
-            );
-        });
-    }
+  static atualizarEstoque(id, estoqueAtualizado) {
+    const query =
+      'UPDATE estoque SET nome_fornecedor = $1, CNPJ = $2, qnt_livros = $3, lote = $4, nome_obra = $5, preco_lote = $6 WHERE id = $7';
 
-    static atualizarEstoque(bd, id_estoque, estoqueAtualizado) {
-        const { nome_fornecedor, CNPJ, qnt_livros, lote, nome_obra, preco_lote } =
-            estoqueAtualizado;
+    return database.query(query, [...Object.values(estoqueAtualizado), id]);
+  }
 
-        return new Promise((resolve, reject) => {
-            bd.run(
-                'UPDATE estoque SET nome_fornecedor = ?, CNPJ = ?, qnt_livros = ?, lote = ?, nome_obra = ?, preco_lote = ? WHERE id_estoque = ?',
-                [
-                    nome_fornecedor,
-                    CNPJ,
-                    qnt_livros,
-                    lote,
-                    nome_obra,
-                    preco_lote,
-                    id_estoque,
-                ],
-                erro => {
-                    if (erro) {
-                        reject(erro);
-                    } else {
-                        resolve('Estoque atualizado com sucesso!');
-                    }
-                }
-            );
-        });
-    }
-
-    static deletarEstoque(bd, id_estoque) {
-        return new Promise((resolve, reject) => {
-            bd.run('DELETE FROM estoque WHERE id_estoque = ?', [id_estoque], erro => {
-                if (erro) {
-                    reject(erro);
-                } else {
-                    resolve('Estoque deletado com sucesso!');
-                }
-            });
-        });
-    }
+  static deletarEstoque(id) {
+    return database.query('DELETE FROM estoque WHERE id = $1', [id]);
+  }
 }
