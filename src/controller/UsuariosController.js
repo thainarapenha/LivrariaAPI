@@ -110,3 +110,12 @@ async function deletarUsuario(request, response) {
     res.status(500).json({ error: erro.message });
   }
 }
+
+export default {
+  listarUsuarios,
+  listarUsuarioPorId,
+  registrarUsuario,
+  loginUsuario,
+  atualizarUsuario,
+  deletarUsuario,
+};
