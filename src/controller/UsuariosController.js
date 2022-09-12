@@ -5,7 +5,7 @@ import UsuarioModel from '../model/UsuarioModel.js';
 
 async function listarUsuarios(_, response) {
   try {
-    const usuarios = await UsuariosDAO.listarUsuarios();
+    const { rows: usuarios } = await UsuariosDAO.listarUsuarios();
 
     if (!usuarios) {
       return response
@@ -24,7 +24,7 @@ async function listarUsuarioPorId(request, response) {
   const { id } = request.params;
 
   try {
-    const usuario = await UsuariosDAO.listarUsuarioPorId(id);
+    const { rows: usuario } = await UsuariosDAO.listarUsuarioPorId(id);
 
     if (!usuario) {
       return response.status(404).json({ message: 'Usuário não existe' });
@@ -57,7 +57,7 @@ async function loginUsuario(request, response) {
   const { email, senha } = request.body;
 
   try {
-    const usuario = await UsuariosDAO.listarUsuarioPorEmail(email);
+    const { rows: usuario } = await UsuariosDAO.listarUsuarioPorEmail(email);
 
     if (!usuario) {
       return response.status(403).json({ message: 'Usuário não existe' });
@@ -81,7 +81,7 @@ async function atualizarUsuario(request, response) {
   const { nome, email, senha } = request.body;
   const usuarioAtualizado = new UsuarioModel(nome, email, senha);
 
-  const usuario = await UsuariosDAO.listarUsuarioPorId(id);
+  const { rows: usuario } = await UsuariosDAO.listarUsuarioPorId(id);
 
   if (!usuario) {
     return response.status(404).json({ message: 'Usuário não existe' });
@@ -97,7 +97,7 @@ async function atualizarUsuario(request, response) {
 
 async function deletarUsuario(request, response) {
   const { id } = request.params;
-  const usuario = await UsuariosDAO.listarUsuariosPorId(id);
+  const { rows: usuario } = await UsuariosDAO.listarUsuariosPorId(id);
 
   if (!usuario) {
     return response.status(404).json({ message: 'Usuário não existe' });
