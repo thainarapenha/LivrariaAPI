@@ -56,7 +56,7 @@ async function adicionarFuncionario(request, response) {
 async function atualizarFuncionario(request, response) {
   const { id } = request.params;
   const { rows: funcionarioExiste } =
-    await FuncionariosDAO.listarFuncionariosPorID(id);
+    await FuncionariosDAO.listarFuncionariosPorId(id);
 
   if (!funcionarioExiste) {
     return response.status(404).json({ error: 'Funcionário não encontrado' });
@@ -81,7 +81,7 @@ async function atualizarFuncionario(request, response) {
 async function deletarFuncionario(request, response) {
   const { id } = request.params;
   const { rows: funcionarioExiste } =
-    await FuncionariosDAO.listarFuncionariosPorID(id);
+    await FuncionariosDAO.listarFuncionariosPorId(id);
 
   if (!funcionarioExiste) {
     return response.status(404).json('Funcionário não existe');

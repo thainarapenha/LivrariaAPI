@@ -32,7 +32,7 @@ async function listarEstoquePorId(request, response) {
 
 async function adicionarEstoque(request, response) {
   const { nome_fornecedor, CNPJ, qnt_livros, lote, nome_obra, preco_lote } =
-    req.body;
+    request.body;
 
   const estoque = new EstoqueModel(
     nome_fornecedor,
@@ -65,7 +65,7 @@ async function atualizarEstoque(request, response) {
   }
 
   const { nome_fornecedor, CNPJ, qnt_livros, lote, nome_obra, preco_lote } =
-    req.body;
+    request.body;
 
   const estoqueAtualizado = new EstoqueModel(
     nome_fornecedor,
@@ -77,7 +77,7 @@ async function atualizarEstoque(request, response) {
   );
 
   try {
-    await EstoqueDAO.atualizarFuncionario(id, estoqueAtualizado);
+    await EstoqueDAO.atualizarEstoque(id, estoqueAtualizado);
     response.status(200).json('Estoque atualizado com sucesso');
   } catch (erro) {
     response.status(400).json({ error: erro.message });

@@ -18,8 +18,8 @@ export default class FuncionariosDAO {
 
   static atualizarFuncionario(id, dadosFuncionario) {
     const query =
-      'UPDATE funcionarios SET nome = $1, cargo = $2, salario = $3, statusFuncionario = $4 WHERE id = $5';
-
+      'UPDATE funcionarios SET CPF = $1, nome = $2, cargo = $3, salario = $4, statusFuncionario = $5 WHERE id = $6';
+    console.log(Object.values(dadosFuncionario));
     return database.query(query, [...Object.values(dadosFuncionario), id]);
   }
 

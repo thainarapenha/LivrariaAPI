@@ -1,6 +1,6 @@
 const validaCPF = CPF => {
   const CPFatualizado = String(CPF).replace(/\D/g, '');
-
+  console.log(CPFatualizado);
   if (CPFatualizado.length !== 11 && !/[A-Z]/gi.test(CPFatualizado)) {
     return false;
   }
@@ -20,5 +20,6 @@ export function validaFuncionario(request, response, next) {
     return response.status(400).json({ error: 'Dados insuficientes' });
   }
 
+  request.body.CPF = CPF;
   next();
 }
