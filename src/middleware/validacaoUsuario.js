@@ -4,9 +4,9 @@ export async function verificaUsuarioJaExiste(request, response, next) {
   const { email } = request.body;
 
   try {
-    const usuario = await UsuariosDAO.listarUsuarioPorEmail(email);
+    const { rows: usuario } = await UsuariosDAO.listarUsuarioPorEmail(email);
 
-    if (usuario) {
+    if (usuario.length > 0) {
       return response.status(409).json({
         message: 'Não é possível cadastrar um usuário com email repetido',
       });

@@ -30,7 +30,7 @@ async function listarUsuarioPorId(request, response) {
       return response.status(404).json({ message: 'Usuário não existe' });
     }
 
-    usuario.senha = undefined;
+    usuario[0].senha = undefined;
     response.json(usuario);
   } catch (erro) {
     response.status(500).json({ error: erro.message });
@@ -45,15 +45,18 @@ async function registrarUsuario(request, response) {
 
   try {
     await UsuariosDAO.adicionarUsuario(usuario);
-    response
+
+    usuario.senha = undefined;
+    return response
       .status(201)
       .json({ usuario, message: 'Usuário cadastrado com sucesso' });
   } catch (erro) {
-    response.status(500).json({ error: erro.message });
+    return response.status(500).json({ error: erro.message });
   }
 }
 
 async function loginUsuario(request, response) {
+  console.log(request.body);
   const { email, senha } = request.body;
 
   try {
@@ -63,14 +66,17 @@ async function loginUsuario(request, response) {
       return response.status(403).json({ message: 'Usuário não existe' });
     }
 
-    const validaSenha = bcrypt.compareSync(String(senha), usuario.senha);
+    const validaSenha = bcrypt.compareSync(String(senha), usuario[0].senha);
 
     if (!validaSenha) {
       return response.status(403).json({ message: 'Usuário não autorizado' });
     }
 
-    usuario.senha = undefined;
-    return response.json({ usuario, message: 'Usuário autorizado' });
+    usuario[0].senha = undefined;
+    return response.json({
+      usuario: usuario[0],
+      message: 'Usuário autorizado',
+    });
   } catch (erro) {
     response.status(500).json({ error: erro.message });
   }
@@ -79,7 +85,9 @@ async function loginUsuario(request, response) {
 async function atualizarUsuario(request, response) {
   const { id } = request.params;
   const { nome, email, senha } = request.body;
-  const usuarioAtualizado = new UsuarioModel(nome, email, senha);
+  const senhaCriptografada = bcrypt.hashSync(senha, 10);
+
+  const usuarioAtualizado = new UsuarioModel(nome, email, senhaCriptografada);
 
   const { rows: usuario } = await UsuariosDAO.listarUsuarioPorId(id);
 
