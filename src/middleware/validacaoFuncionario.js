@@ -1,4 +1,12 @@
-import { validaCPF } from './validacaoUsuario.js';
+const validaCPF = CPF => {
+  const CPFatualizado = String(CPF).replace(/\D/g, '');
+
+  if (CPFatualizado.length !== 11 && !/[A-Z]/gi.test(CPFatualizado)) {
+    return false;
+  }
+
+  return CPFatualizado;
+};
 
 export function validaFuncionario(request, response, next) {
   let { CPF, nome, cargo, salario, statusFuncionario } = request.body;
