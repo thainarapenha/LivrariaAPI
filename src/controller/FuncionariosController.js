@@ -3,7 +3,7 @@ import FuncionariosModel from '../model/FuncionariosModel.js';
 
 async function listarFuncionarios(_, response) {
   try {
-    const funcionarios = await FuncionariosDAO.listarFuncionarios();
+    const { rows: funcionarios } = await FuncionariosDAO.listarFuncionarios();
 
     if (!funcionarios) {
       response.status(404).send('Nenhum funcionário encontrado');
@@ -18,7 +18,9 @@ async function listarFuncionarios(_, response) {
 async function listarFuncionarioPorId(request, response) {
   try {
     const { id } = request.params;
-    const funcionario = await FuncionariosDAO.listarFuncionariosPorId(id);
+    const { rows: funcionario } = await FuncionariosDAO.listarFuncionariosPorId(
+      id
+    );
 
     if (!funcionario) {
       response.status(404).json({ erro: 'Funcionário não encontrado' });
@@ -53,7 +55,8 @@ async function adicionarFuncionario(request, response) {
 
 async function atualizarFuncionario(request, response) {
   const { id } = request.params;
-  const funcionarioExiste = await FuncionariosDAO.listarFuncionariosPorID(id);
+  const { rows: funcionarioExiste } =
+    await FuncionariosDAO.listarFuncionariosPorID(id);
 
   if (!funcionarioExiste) {
     return response.status(404).json({ error: 'Funcionário não encontrado' });
@@ -77,7 +80,8 @@ async function atualizarFuncionario(request, response) {
 }
 async function deletarFuncionario(request, response) {
   const { id } = request.params;
-  const funcionarioExiste = await FuncionariosDAO.listarFuncionariosPorID(id);
+  const { rows: funcionarioExiste } =
+    await FuncionariosDAO.listarFuncionariosPorID(id);
 
   if (!funcionarioExiste) {
     return response.status(404).json('Funcionário não existe');

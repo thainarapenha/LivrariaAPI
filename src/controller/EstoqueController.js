@@ -3,7 +3,7 @@ import EstoqueModel from '../model/EstoqueModel.js';
 
 async function listarEstoque(_, response) {
   try {
-    const estoque = await EstoqueDAO.listarEstoque();
+    const { rows: estoque } = await EstoqueDAO.listarEstoque();
 
     if (!estoque) {
       response.status(404).send('Nenhum estoque encontrado');
@@ -18,7 +18,7 @@ async function listarEstoque(_, response) {
 async function listarEstoquePorId(request, response) {
   try {
     const { id } = request.params;
-    const estoque = await EstoqueDAO.listarEstoquePorId(id);
+    const { rows: estoque } = await EstoqueDAO.listarEstoquePorId(id);
 
     if (!estoque) {
       response.status(404).json({ erro: 'Não encontrado' });
@@ -56,7 +56,7 @@ async function adicionarEstoque(request, response) {
 
 async function atualizarEstoque(request, response) {
   const { id } = request.params;
-  const estoqueExiste = await EstoqueDAO.listarEstoquePorId(id);
+  const { rows: estoqueExiste } = await EstoqueDAO.listarEstoquePorId(id);
 
   if (!estoqueExiste) {
     return response
@@ -85,7 +85,7 @@ async function atualizarEstoque(request, response) {
 }
 async function deletarEstoque(request, response) {
   const { id } = request.params;
-  const estoqueExiste = await EstoqueDAO.listarEstoquePorId(id);
+  const { rows: estoqueExiste } = await EstoqueDAO.listarEstoquePorId(id);
 
   if (!estoqueExiste) {
     return response
