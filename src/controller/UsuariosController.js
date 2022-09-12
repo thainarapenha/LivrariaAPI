@@ -7,7 +7,7 @@ async function listarUsuarios(_, response) {
   try {
     const { rows: usuarios } = await UsuariosDAO.listarUsuarios();
 
-    if (!usuarios) {
+    if (!usuarios[0]) {
       return response
         .status(404)
         .json({ message: 'Nenhum usuário cadastrado' });
@@ -26,7 +26,7 @@ async function listarUsuarioPorId(request, response) {
   try {
     const { rows: usuario } = await UsuariosDAO.listarUsuarioPorId(id);
 
-    if (!usuario) {
+    if (!usuario[0]) {
       return response.status(404).json({ message: 'Usuário não existe' });
     }
 
@@ -56,13 +56,12 @@ async function registrarUsuario(request, response) {
 }
 
 async function loginUsuario(request, response) {
-  console.log(request.body);
   const { email, senha } = request.body;
 
   try {
     const { rows: usuario } = await UsuariosDAO.listarUsuarioPorEmail(email);
 
-    if (!usuario) {
+    if (!usuario[0]) {
       return response.status(403).json({ message: 'Usuário não existe' });
     }
 
@@ -91,7 +90,7 @@ async function atualizarUsuario(request, response) {
 
   const { rows: usuario } = await UsuariosDAO.listarUsuarioPorId(id);
 
-  if (!usuario) {
+  if (!usuario[0]) {
     return response.status(404).json({ message: 'Usuário não existe' });
   }
 
@@ -105,9 +104,9 @@ async function atualizarUsuario(request, response) {
 
 async function deletarUsuario(request, response) {
   const { id } = request.params;
-  const { rows: usuario } = await UsuariosDAO.listarUsuariosPorId(id);
+  const { rows: usuario } = await UsuariosDAO.listarUsuarioPorId(id);
 
-  if (!usuario) {
+  if (!usuario[0]) {
     return response.status(404).json({ message: 'Usuário não existe' });
   }
 

@@ -5,7 +5,7 @@ async function listarFuncionarios(_, response) {
   try {
     const { rows: funcionarios } = await FuncionariosDAO.listarFuncionarios();
 
-    if (!funcionarios) {
+    if (!funcionarios[0]) {
       response.status(404).send('Nenhum funcionário encontrado');
     }
 
@@ -22,7 +22,7 @@ async function listarFuncionarioPorId(request, response) {
       id
     );
 
-    if (!funcionario) {
+    if (!funcionario[0]) {
       response.status(404).json({ erro: 'Funcionário não encontrado' });
     }
 
@@ -58,7 +58,7 @@ async function atualizarFuncionario(request, response) {
   const { rows: funcionarioExiste } =
     await FuncionariosDAO.listarFuncionariosPorId(id);
 
-  if (!funcionarioExiste) {
+  if (!funcionarioExiste[0]) {
     return response.status(404).json({ error: 'Funcionário não encontrado' });
   }
 
@@ -83,7 +83,7 @@ async function deletarFuncionario(request, response) {
   const { rows: funcionarioExiste } =
     await FuncionariosDAO.listarFuncionariosPorId(id);
 
-  if (!funcionarioExiste) {
+  if (!funcionarioExiste[0]) {
     return response.status(404).json('Funcionário não existe');
   }
 

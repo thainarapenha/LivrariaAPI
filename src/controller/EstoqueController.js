@@ -5,7 +5,7 @@ async function listarEstoque(_, response) {
   try {
     const { rows: estoque } = await EstoqueDAO.listarEstoque();
 
-    if (!estoque) {
+    if (!estoque[0]) {
       response.status(404).send('Nenhum estoque encontrado');
     }
 
@@ -20,7 +20,7 @@ async function listarEstoquePorId(request, response) {
     const { id } = request.params;
     const { rows: estoque } = await EstoqueDAO.listarEstoquePorId(id);
 
-    if (!estoque) {
+    if (!estoque[0]) {
       response.status(404).json({ erro: 'Não encontrado' });
     }
 
@@ -58,7 +58,7 @@ async function atualizarEstoque(request, response) {
   const { id } = request.params;
   const { rows: estoqueExiste } = await EstoqueDAO.listarEstoquePorId(id);
 
-  if (!estoqueExiste) {
+  if (!estoqueExiste[0]) {
     return response
       .status(404)
       .json({ error: 'O estoque desejado não encontrado' });
@@ -87,7 +87,7 @@ async function deletarEstoque(request, response) {
   const { id } = request.params;
   const { rows: estoqueExiste } = await EstoqueDAO.listarEstoquePorId(id);
 
-  if (!estoqueExiste) {
+  if (!estoqueExiste[0]) {
     return response
       .status(404)
       .json({ error: 'O estoque desejado não encontrado' });
