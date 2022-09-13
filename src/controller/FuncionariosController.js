@@ -1,4 +1,4 @@
-import FuncionariosDAO from '../dao/FuncionariosDAO.js';
+import FuncionariosDAO from '../DAO/FuncionariosDAO.js';
 import FuncionariosModel from '../model/FuncionariosModel.js';
 
 async function listarFuncionarios(_, response) {

@@ -1,4 +1,4 @@
-import LivroDAO from '../dao/LivrosDAO.js';
+import LivroDAO from '../DAO/LivrosDAO.js';
 import LivrosModel from '../model/LivrosModel.js';
 
 async function listarLivros(_, response) {

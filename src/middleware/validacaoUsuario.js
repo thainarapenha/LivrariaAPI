@@ -1,4 +1,4 @@
-import UsuariosDAO from '../dao/UsuariosDAO.js';
+import UsuariosDAO from '../DAO/UsuariosDAO.js';
 
 export async function verificaUsuarioJaExiste(request, response, next) {
   const { email } = request.body;

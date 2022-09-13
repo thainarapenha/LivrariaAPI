@@ -1,4 +1,4 @@
-import EstoqueDAO from '../dao/EstoqueDAO.js';
+import EstoqueDAO from '../DAO/EstoqueDAO.js';
 import EstoqueModel from '../model/EstoqueModel.js';
 
 async function listarEstoque(_, response) {
