@@ -1,20 +1,33 @@
-function validacaoUsuario(request, response, next) {
-  let { nome, email, senha, CPF } = request.body;
-  CPF = validaCPF(CPF);
+import UsuariosDAO from '../dao/UsuariosDAO.js';
 
-  if (!nome) {
+export async function verificaUsuarioJaExiste(request, response, next) {
+  const { email } = request.body;
+
+  try {
+    const { rows: usuario } = await UsuariosDAO.listarUsuarioPorEmail(email);
+
+    if (usuario.length > 0) {
+      return response.status(409).json({
+        message: 'Não é possível cadastrar um usuário com email repetido',
+      });
+    }
+
+    return next();
+  } catch (erro) {
+    return response.status(400).json({ erro: erro.message });
+  }
+}
+
+export function validacaoUsuario(request, response, next) {
+  if (!request.body.nome) {
     return response.status(400).json({ error: 'Nome é obrigatório' });
   }
 
-  if (!CPF) {
-    return response.status(400).json({ erro: 'CPF inválido' });
-  }
-
-  if (!validaEmail(email)) {
+  if (!validaEmail(request.body.email)) {
     return response.status(400).json({ erro: 'Email inválido' });
   }
 
-  if (senha.length < 6) {
+  if (request.body.senha.length < 6) {
     return response
       .status(400)
       .json({ erro: 'Senha deve ter no mínimo 6 caracteres' });
@@ -23,20 +36,7 @@ function validacaoUsuario(request, response, next) {
   return next();
 }
 
-const validaCPF = CPF => {
-  const CPFatualizado = String(CPF).replace(/\D/g, '');
-
-  if (CPFatualizado.length !== 11 && !/[A-Z]/gi.test(CPFatualizado)) {
-    return false;
-  }
-
-  return CPFatualizado;
-};
-
 const validaEmail = email => {
   const regexValidaEmail = /^\S+@\S+\.\S+$/;
-
   return regexValidaEmail.test(email);
 };
-
-export { validacaoUsuario, validaCPF };

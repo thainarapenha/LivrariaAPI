@@ -1,98 +1,82 @@
-import LivroDAO from "../DAO/LivrosDAO.js"
-import bd from "../data/sqlite.js"
-import LivrosModel from "../model/LivrosModel.js"
-import validacaoLivro from "../middleware/validacaoLivros.js"
-export const Livros = app => {
+import LivroDAO from '../dao/LivrosDAO.js';
+import LivrosModel from '../model/LivrosModel.js';
 
-    //READ 
-    app.get('/livros/', (req, res) => {
-        LivroDAO.listarLivros(bd)
-            .then((success) => {
-                res.status(200).json(success)
-            }).catch((error) => {
-                res.status(400).json(error)
-            })
+async function listarLivros(_, response) {
+  try {
+    const { rows: livros } = await LivroDAO.listarLivros();
 
-    })
-
-    app.get('/livros/:id', async (req, res) => {
-        const id_livro = req.params.id
-        try {
-            const livro = await LivroDAO.listarLivrosPorId(bd, id_livro)
-
-            if (!livro) {
-                res.status(400).json({
-                    message: "Livro não encontrado"
-                })
-            }
-
-            res.status(200).json(livro)
-        } catch (erro) {
-            res.status(400).json(erro)
-        }
-
-    })
-
-    //CREATE 
-    app.post('/livros', validacaoLivro, async (req, res) => {
-        const { titulo, descricao, categoria, url_img, preco, total_paginas, ano_publicacao, autor } = req.body
-        const livro = new LivrosModel(titulo, descricao, categoria, url_img, preco, total_paginas, ano_publicacao, autor)
-        const message = {
-            success: 'Livro cadastrado com sucesso',
-            error: false
-        }
-        try {
-            await LivroDAO.adicionarLivros(bd, livro)
-            res.status(201).json(message.success)
-        } catch (erro) {
-            res.status(400).json({ error: erro.message })
-        }
-    })
-    //UPDATE 
-    app.patch('/livros/:id', async (req, res) => {
-        const id_livro = req.params.id
-        const { titulo, descricao, categoria, url_img, preco, total_paginas, ano_publicacao, autor } = req.body
-        const livroAtualizado = new LivrosModel(titulo, descricao, categoria, url_img, preco, total_paginas, ano_publicacao, autor)
-        const message = {
-            success: 'O livro especificado não foi encontrado.',
-            error: false
-        }
-        const messageAtt = {
-            success: 'Livro atualizado com sucesso.',
-            error: false
-        }
-        const livroExiste = await LivroDAO.listarLivrosPorId(bd, id_livro);
-        if (!livroExiste) {
-            return res
-                .status(404)
-                .json(message.success);
-        }
-        try {
-            await LivroDAO.atualizarLivro(bd, id_livro, livroAtualizado); // parametros chamados
-            res.status(200).json(messageAtt.success);
-        } catch (erro) {
-            res.status(400).json({ error: erro.message });
-        }
-    });
-
-
-    //DELETE
-    app.delete('/livros/:id', async (req, res) => {
-        const id_livro = req.params.id;
-        const livroExiste = await LivroDAO.listarLivrosPorId(bd, id_livro)
-        const message = {
-            success: "O livro especificado não encontrado",
-            error: false,
-        }
-
-        if (!livroExiste) {
-            return res.status(404).json(message.success)
-        }
-        try {
-            await LivroDAO.deletarLivro(bd, id_livro)
-            res.status(200).json({ message: "Livro deletado com sucesso" })
-        } catch (erro) {
-            res.status(400).json({ error: erro.message });
-        }
-    })
+    response.json(livros);
+  } catch (erro) {
+    response.status(400).json({ error: erro });
+  }
 }
+
+async function listarLivroPorId(request, response) {
+  const { id } = request.params;
+
+  try {
+    const { rows: livro } = await LivroDAO.listarLivroPorId(id);
+
+    if (!livro.length) {
+      return response.status(400).json({ message: 'Livro não encontrado' });
+    }
+
+    response.json(livro);
+  } catch (erro) {
+    response.status(400).json({ error: erro.message });
+  }
+}
+
+async function adicionarLivro(request, response) {
+  const livro = new LivrosModel(request.body);
+
+  try {
+    await LivroDAO.adicionarLivros(livro);
+    response.status(201).json(livro);
+  } catch (erro) {
+    response.status(400).json({ error: erro.message });
+  }
+}
+
+async function atualizarLivro(request, response) {
+  const { id } = request.params;
+  const livroAtualizado = new LivrosModel(request.body);
+
+  try {
+    const { rows: livroExiste } = await LivroDAO.listarLivroPorId(id);
+
+    if (!livroExiste.length) {
+      return response.status(404).json({ erro: 'Livro não existe' });
+    }
+
+    await LivroDAO.atualizarLivro(id, livroAtualizado);
+    response.status(200).json({ message: 'Livro atualizado com sucesso' });
+  } catch (erro) {
+    response.status(400).json({ error: erro.message });
+  }
+}
+
+async function deletarLivro(request, response) {
+  const { id } = request.params;
+
+  try {
+    const { rows: livroExiste } = await LivroDAO.listarLivroPorId(id);
+
+    if (!livroExiste.length) {
+      return response.status(404).json({ erro: 'Livro não existe' });
+    }
+
+    await LivroDAO.deletarLivro(id);
+    response.status(200).json({ message: 'Livro deletado com sucesso' });
+  } catch (erro) {
+    response.status(400).json({ error: erro.message });
+  }
+}
+
+export default {
+  listarLivros,
+  listarLivroPorId,
+  adicionarLivro,
+  atualizarLivro,
+  deletarLivro,
+};
