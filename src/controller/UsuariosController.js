@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 
-import UsuariosDAO from '../dao/UsuariosDAO.js';
+import UsuariosDAO from '../DAO/UsuariosDAO.js';
 import UsuarioModel from '../model/UsuarioModel.js';
 
 async function listarUsuarios(_, response) {
