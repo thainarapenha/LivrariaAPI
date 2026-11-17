@@ -1,15 +1,32 @@
-import express from 'express';
-import cors from 'cors';
+import dotenv from 'dotenv'
+dotenv.config()
 
-import { routes } from './router/routes.js';
+import express from 'express'
+import cors from 'cors'
 
-const app = express();
-const port = process.env.PORT || 3000;
+import { database } from './infra/database.js'
+import { routes } from './router/routes.js'
 
-app.use(cors());
-app.use(express.json());
-routes(app);
+const app = express()
+const port = process.env.PORT || 3000
 
-app.listen(port, () => {
-  console.log(`Servidor rodando em http://localhost:${port}`);
-});
+app.use(cors())
+app.use(express.json())
+
+routes(app)
+
+const startServer = async () => {
+  try {
+    await database.query('SELECT 1')
+
+    app.listen(port, () => {
+      console.log(`Servidor rodando em http://localhost:${port}`)
+      console.log('Conexão com PostgreSQL estabelecida.')
+    })
+  } catch (error) {
+    console.error('Não foi possível conectar ao PostgreSQL:', error)
+    process.exit(1)
+  }
+}
+
+startServer()
