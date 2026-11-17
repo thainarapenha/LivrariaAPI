@@ -1,11 +1,13 @@
 import { usuariosRouter } from './usuariosRoutes.js';
-import { livrosRouter } from './livrosRoutes.js';
 import { funcionariosRouter } from './funcionariosRoutes.js';
 import { estoqueRouter } from './estoqueRoutes.js';
+import { booksRouter } from '../routes/booksRoutes.js';
+import { customersRouter } from '../routes/customersRoutes.js';
 
 export const routes = app => {
   app.use(usuariosRouter);
-  app.use(livrosRouter);
+  app.use(booksRouter);
+  app.use(customersRouter);
   app.use(funcionariosRouter);
   app.use(estoqueRouter);
 };
