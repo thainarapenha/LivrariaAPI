@@ -5,7 +5,7 @@ import express from 'express'
 import cors from 'cors'
 
 import { database } from './infra/database.js'
-import { routes } from './router/routes.js'
+import { registerRoutes } from './routes/routes.js'
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -13,7 +13,7 @@ const port = process.env.PORT || 3000
 app.use(cors())
 app.use(express.json())
 
-routes(app)
+registerRoutes(app)
 
 const startServer = async () => {
   try {
