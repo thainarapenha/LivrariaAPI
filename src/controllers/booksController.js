@@ -5,9 +5,81 @@ import {
 
 const isPositiveInteger = (value) => /^[1-9]\d*$/.test(value)
 
-export const listBooks = async (_request, response) => {
+const isValidSlug = slug =>
+  typeof slug === 'string' && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)
+
+const parseBooleanParameter = (value, parameterName) => {
+  if (value === undefined) return { value: undefined }
+  if (value === 'true') return { value: true }
+  if (value === 'false') return { value: false }
+
+  return { error: `${parameterName} must be true or false` }
+}
+
+const parsePriceParameter = (value, parameterName) => {
+  if (value === undefined) return { value: undefined }
+  if (typeof value !== 'string' || value.trim() === '') {
+    return { error: `${parameterName} must be a finite non-negative number` }
+  }
+
+  const numericValue = Number(value)
+  if (!Number.isFinite(numericValue) || numericValue < 0) {
+    return { error: `${parameterName} must be a finite non-negative number` }
+  }
+
+  return { value: numericValue }
+}
+
+const parseBookFilters = query => {
+  const filters = {}
+
+  if (query.categories !== undefined) {
+    if (typeof query.categories !== 'string' || query.categories.trim() === '') {
+      return { error: 'categories must contain one or more slugs' }
+    }
+
+    const categories = query.categories.split(',').map(category => category.trim())
+    if (categories.some(category => !category || !isValidSlug(category))) {
+      return { error: 'categories must contain valid slugs' }
+    }
+
+    if (new Set(categories).size !== categories.length) {
+      return { error: 'categories must not contain duplicate slugs' }
+    }
+
+    filters.categories = categories
+  }
+
+  for (const parameterName of ['minPrice', 'maxPrice']) {
+    const result = parsePriceParameter(query[parameterName], parameterName)
+    if (result.error) return result
+    if (result.value !== undefined) filters[parameterName] = result.value
+  }
+
+  if (filters.minPrice !== undefined &&
+    filters.maxPrice !== undefined &&
+    filters.minPrice > filters.maxPrice) {
+    return { error: 'minPrice must not be greater than maxPrice' }
+  }
+
+  for (const parameterName of ['preorder', 'newRelease', 'promotion']) {
+    const result = parseBooleanParameter(query[parameterName], parameterName)
+    if (result.error) return result
+    if (result.value !== undefined) filters[parameterName] = result.value
+  }
+
+  return { filters }
+}
+
+export const listBooks = async (request, response) => {
+  const { filters, error: validationError } = parseBookFilters(request.query)
+
+  if (validationError) {
+    return response.status(400).json({ error: validationError })
+  }
+
   try {
-    const { rows } = await findActiveBooks()
+    const { rows } = await findActiveBooks(filters)
 
     return response.status(200).json(rows)
   } catch (error) {
