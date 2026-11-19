@@ -2,7 +2,7 @@
   "name": "livrariaapi",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/server.js",
   "type": "module",
   "scripts": {
     "dev": "nodemon ./src/server.js",

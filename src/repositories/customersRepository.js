@@ -37,3 +37,17 @@ export const findCustomerById = async (id) => {
 
   return database.query(query, [id])
 }
+
+export const updateCustomerById = async (id, { name, email, passwordHash }) => {
+  const query = `
+    UPDATE customers
+    SET name = $1,
+        email = $2,
+        password_hash = COALESCE($3, password_hash),
+        updated_at = CURRENT_TIMESTAMP
+    WHERE id = $4
+    RETURNING ${customerColumns}
+  `
+
+  return database.query(query, [name, email, passwordHash, id])
+}

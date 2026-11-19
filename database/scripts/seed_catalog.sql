@@ -1,386 +1,81 @@
 BEGIN;
 
-DO $$
-BEGIN
-  IF EXISTS (
-    SELECT 1
-    FROM unnest(
-      ARRAY[
-        'ficcao',
-        'terror-e-suspense',
-        'hqs-e-mangas',
-        'fantasia',
-        'romance',
-        'infantil',
-        'acao',
-        'serial-killers',
-        'poesia',
-        'nao-ficcao'
-      ]::text[]
-    ) AS expected(slug)
-    WHERE NOT EXISTS (
-      SELECT 1
-      FROM categories
-      WHERE categories.slug = expected.slug
-    )
-  ) THEN
-    RAISE EXCEPTION 'Uma ou mais categorias esperadas não existem';
-  END IF;
-END
-$$;
+INSERT INTO public.books (id, title, author, publisher, isbn, description, image_url, price, stock_quantity, is_active, created_at, updated_at, is_preorder, release_date, is_new_release, promotion_price, promotion_starts_at, promotion_ends_at) OVERRIDING SYSTEM VALUE VALUES (36, 'Lira dos Vinte Anos', 'Álvares de Azevedo', 'Lafonte', '9786586096965', 'Coletânea poética do escritor Álvares de Azevedo.', 'https://covers.openlibrary.org/b/id/12456664-L.jpg?default=false', 34.90, 10, true, '2026-11-18 13:04:02.071818-03', '2026-11-18 13:04:02.071818-03', false, NULL, false, NULL, NULL, NULL);
+INSERT INTO public.books (id, title, author, publisher, isbn, description, image_url, price, stock_quantity, is_active, created_at, updated_at, is_preorder, release_date, is_new_release, promotion_price, promotion_starts_at, promotion_ends_at) OVERRIDING SYSTEM VALUE VALUES (9, 'São Bernardo', 'Graciliano Ramos', 'Principis', '9786550971335', 'Romance de Graciliano Ramos.', 'https://covers.openlibrary.org/b/id/4461279-L.jpg?default=false', 34.90, 10, true, '2026-11-18 13:01:47.153158-03', '2026-11-18 13:01:47.153158-03', false, NULL, false, NULL, NULL, NULL);
+INSERT INTO public.books (id, title, author, publisher, isbn, description, image_url, price, stock_quantity, is_active, created_at, updated_at, is_preorder, release_date, is_new_release, promotion_price, promotion_starts_at, promotion_ends_at) OVERRIDING SYSTEM VALUE VALUES (10, 'Senhora', 'José de Alencar', 'Principis', '9786555520767', 'Romance clássico de José de Alencar.', 'https://covers.openlibrary.org/b/id/5050225-L.jpg?default=false', 29.90, 10, true, '2026-11-18 13:01:47.153158-03', '2026-11-18 13:01:47.153158-03', false, NULL, false, NULL, NULL, NULL);
+INSERT INTO public.books (id, title, author, publisher, isbn, description, image_url, price, stock_quantity, is_active, created_at, updated_at, is_preorder, release_date, is_new_release, promotion_price, promotion_starts_at, promotion_ends_at) OVERRIDING SYSTEM VALUE VALUES (11, 'Triste Fim de Policarpo Quaresma', 'Lima Barreto', 'Principis', '9786555527476', 'Romance clássico de Lima Barreto.', 'https://covers.openlibrary.org/b/id/5459319-L.jpg?default=false', 34.90, 10, true, '2026-11-18 13:01:47.153158-03', '2026-11-18 13:01:47.153158-03', false, NULL, false, NULL, NULL, NULL);
+INSERT INTO public.books (id, title, author, publisher, isbn, description, image_url, price, stock_quantity, is_active, created_at, updated_at, is_preorder, release_date, is_new_release, promotion_price, promotion_starts_at, promotion_ends_at) OVERRIDING SYSTEM VALUE VALUES (37, 'Noite na Taverna / Macário', 'Álvares de Azevedo', 'Martin Claret', '9788572325974', 'Obras do ultrarromantismo brasileiro.', 'https://covers.openlibrary.org/b/isbn/9788572325974-L.jpg?default=false', 34.90, 10, true, '2026-11-18 13:04:02.071818-03', '2026-11-18 13:04:02.071818-03', false, NULL, false, NULL, NULL, NULL);
+INSERT INTO public.books (id, title, author, publisher, isbn, description, image_url, price, stock_quantity, is_active, created_at, updated_at, is_preorder, release_date, is_new_release, promotion_price, promotion_starts_at, promotion_ends_at) OVERRIDING SYSTEM VALUE VALUES (12, 'Vidas Secas', 'Graciliano Ramos', 'Principis', '9786550971298', 'Romance clássico de Graciliano Ramos.', 'https://covers.openlibrary.org/b/id/12369687-L.jpg?default=false', 34.90, 10, true, '2026-11-18 13:01:47.153158-03', '2026-11-18 13:01:47.153158-03', false, NULL, false, NULL, NULL, NULL);
+INSERT INTO public.books (id, title, author, publisher, isbn, description, image_url, price, stock_quantity, is_active, created_at, updated_at, is_preorder, release_date, is_new_release, promotion_price, promotion_starts_at, promotion_ends_at) OVERRIDING SYSTEM VALUE VALUES (20, 'O Hobbit', 'J. R. R. Tolkien', 'HarperCollins Brasil', '9788595084742', 'Aventura de Bilbo Bolseiro pela Terra-média.', 'https://covers.openlibrary.org/b/isbn/9788595084742-L.jpg?default=false', 59.90, 10, true, '2026-11-18 13:03:10.23957-03', '2026-11-18 13:03:10.23957-03', true, '2027-01-15', false, NULL, NULL, NULL);
+INSERT INTO public.books (id, title, author, publisher, isbn, description, image_url, price, stock_quantity, is_active, created_at, updated_at, is_preorder, release_date, is_new_release, promotion_price, promotion_starts_at, promotion_ends_at) OVERRIDING SYSTEM VALUE VALUES (34, 'A Hora da Estrela', 'Clarice Lispector', 'Rocco', '9786555325218', 'Romance sobre a vida de Macabéa, personagem criada por Clarice Lispector.', 'https://covers.openlibrary.org/b/id/650866-L.jpg?default=false', 49.90, 10, true, '2026-11-18 13:03:10.23957-03', '2026-11-18 13:03:10.23957-03', false, '2026-10-28', true, NULL, NULL, NULL);
+INSERT INTO public.books (id, title, author, publisher, isbn, description, image_url, price, stock_quantity, is_active, created_at, updated_at, is_preorder, release_date, is_new_release, promotion_price, promotion_starts_at, promotion_ends_at) OVERRIDING SYSTEM VALUE VALUES (59, 'Helena', 'Machado de Assis', 'Martin Claret', '9788572325363', 'Romance de Machado de Assis publicado originalmente em 1876.', 'https://covers.openlibrary.org/b/id/6948484-L.jpg?default=false', 34.90, 10, true, '2026-11-18 13:04:02.071818-03', '2026-11-18 13:04:02.071818-03', false, NULL, false, NULL, NULL, NULL);
+INSERT INTO public.books (id, title, author, publisher, isbn, description, image_url, price, stock_quantity, is_active, created_at, updated_at, is_preorder, release_date, is_new_release, promotion_price, promotion_starts_at, promotion_ends_at) OVERRIDING SYSTEM VALUE VALUES (56, 'Iracema', 'José de Alencar', 'Lafonte', '9788581862934', 'Romance indianista sobre a origem lendária do Ceará.', 'https://covers.openlibrary.org/b/id/2664651-L.jpg?default=false', 29.90, 10, true, '2026-11-18 13:04:02.071818-03', '2026-11-18 13:04:02.071818-03', false, NULL, false, NULL, NULL, NULL);
+INSERT INTO public.books (id, title, author, publisher, isbn, description, image_url, price, stock_quantity, is_active, created_at, updated_at, is_preorder, release_date, is_new_release, promotion_price, promotion_starts_at, promotion_ends_at) OVERRIDING SYSTEM VALUE VALUES (54, 'Marília de Dirceu', 'Tomás Antônio Gonzaga', 'Lafonte', '9788581863122', 'Obra poética do arcadismo brasileiro.', 'https://covers.openlibrary.org/b/id/7246712-L.jpg?default=false', 34.90, 10, true, '2026-11-18 13:04:02.071818-03', '2026-11-18 13:04:02.071818-03', false, NULL, false, NULL, NULL, NULL);
+INSERT INTO public.books (id, title, author, publisher, isbn, description, image_url, price, stock_quantity, is_active, created_at, updated_at, is_preorder, release_date, is_new_release, promotion_price, promotion_starts_at, promotion_ends_at) OVERRIDING SYSTEM VALUE VALUES (52, 'Memórias de um Sargento de Milícias', 'Manuel Antônio de Almeida', 'Lafonte', '9788581863016', 'Romance brasileiro sobre as aventuras de Leonardo.', 'https://covers.openlibrary.org/b/id/123863-L.jpg?default=false', 34.90, 10, true, '2026-11-18 13:04:02.071818-03', '2026-11-18 13:04:02.071818-03', false, NULL, false, NULL, NULL, NULL);
+INSERT INTO public.books (id, title, author, publisher, isbn, description, image_url, price, stock_quantity, is_active, created_at, updated_at, is_preorder, release_date, is_new_release, promotion_price, promotion_starts_at, promotion_ends_at) OVERRIDING SYSTEM VALUE VALUES (58, 'O Mulato', 'Aluísio Azevedo', 'Martin Claret', '9788572325189', 'Romance naturalista brasileiro sobre preconceito e desigualdade.', 'https://covers.openlibrary.org/b/id/12905849-L.jpg?default=false', 34.90, 10, true, '2026-11-18 13:04:02.071818-03', '2026-11-18 13:04:02.071818-03', false, '2026-11-15', true, NULL, NULL, NULL);
+INSERT INTO public.books (id, title, author, publisher, isbn, description, image_url, price, stock_quantity, is_active, created_at, updated_at, is_preorder, release_date, is_new_release, promotion_price, promotion_starts_at, promotion_ends_at) OVERRIDING SYSTEM VALUE VALUES (55, 'Til', 'José de Alencar', 'Lafonte', '9788581863429', 'Romance regionalista ambientado no interior paulista.', 'https://covers.openlibrary.org/b/id/13250779-L.jpg?default=false', 34.90, 10, true, '2026-11-18 13:04:02.071818-03', '2026-11-18 13:04:02.071818-03', false, NULL, false, NULL, NULL, NULL);
+INSERT INTO public.books (id, title, author, publisher, isbn, description, image_url, price, stock_quantity, is_active, created_at, updated_at, is_preorder, release_date, is_new_release, promotion_price, promotion_starts_at, promotion_ends_at) OVERRIDING SYSTEM VALUE VALUES (33, 'O Diário de Anne Frank', 'Anne Frank', 'Record', '9788501044457', 'Relato autobiográfico escrito durante a ocupação nazista.', 'https://covers.openlibrary.org/b/isbn/9788501044457-L.jpg?default=false', 49.90, 10, true, '2026-11-18 13:03:10.23957-03', '2026-11-18 13:03:10.23957-03', true, '2027-02-15', false, NULL, NULL, NULL);
+INSERT INTO public.books (id, title, author, publisher, isbn, description, image_url, price, stock_quantity, is_active, created_at, updated_at, is_preorder, release_date, is_new_release, promotion_price, promotion_starts_at, promotion_ends_at) OVERRIDING SYSTEM VALUE VALUES (21, 'O Silmarillion', 'J. R. R. Tolkien', 'HarperCollins Brasil', '9788595084377', 'Narrativas sobre a criação e a história da Terra-média.', 'https://covers.openlibrary.org/b/isbn/9788595084377-L.jpg?default=false', 69.90, 10, true, '2026-11-18 13:03:10.23957-03', '2026-11-18 13:03:10.23957-03', true, '2027-01-20', false, NULL, NULL, NULL);
+INSERT INTO public.books (id, title, author, publisher, isbn, description, image_url, price, stock_quantity, is_active, created_at, updated_at, is_preorder, release_date, is_new_release, promotion_price, promotion_starts_at, promotion_ends_at) OVERRIDING SYSTEM VALUE VALUES (22, 'O Senhor dos Anéis: A Sociedade do Anel', 'J. R. R. Tolkien', 'HarperCollins Brasil', '9788595084759', 'Primeiro volume da trilogia O Senhor dos Anéis.', 'https://covers.openlibrary.org/b/isbn/9788595084759-L.jpg?default=false', 69.90, 10, true, '2026-11-18 13:03:10.23957-03', '2026-11-18 13:03:10.23957-03', true, '2027-02-05', false, NULL, NULL, NULL);
+INSERT INTO public.books (id, title, author, publisher, isbn, description, image_url, price, stock_quantity, is_active, created_at, updated_at, is_preorder, release_date, is_new_release, promotion_price, promotion_starts_at, promotion_ends_at) OVERRIDING SYSTEM VALUE VALUES (25, 'Extraordinário', 'R. J. Palacio', 'Intrínseca', '9788580573015', 'História de Auggie Pullman e seus desafios na escola.', 'https://covers.openlibrary.org/b/isbn/9788580573015-L.jpg?default=false', 49.90, 10, true, '2026-11-18 13:03:10.23957-03', '2026-11-18 13:03:10.23957-03', false, '2026-10-20', true, NULL, NULL, NULL);
+INSERT INTO public.books (id, title, author, publisher, isbn, description, image_url, price, stock_quantity, is_active, created_at, updated_at, is_preorder, release_date, is_new_release, promotion_price, promotion_starts_at, promotion_ends_at) OVERRIDING SYSTEM VALUE VALUES (50, 'Coração Assombrado', 'Lisa Rogak', 'DarkSide Books', '9788594540393', 'Biografia de Stephen King.', 'https://covers.openlibrary.org/b/isbn/9788594540393-L.jpg?default=false', 59.90, 8, true, '2026-11-18 13:04:02.071818-03', '2026-11-18 15:11:17.44636-03', true, '2027-03-01', false, NULL, NULL, NULL);
+INSERT INTO public.books (id, title, author, publisher, isbn, description, image_url, price, stock_quantity, is_active, created_at, updated_at, is_preorder, release_date, is_new_release, promotion_price, promotion_starts_at, promotion_ends_at) OVERRIDING SYSTEM VALUE VALUES (2, 'A Moreninha', 'Joaquim Manuel de Macedo', 'Principis', '9786550970055', 'Romance clássico da literatura brasileira.', 'https://covers.openlibrary.org/b/id/15203760-L.jpg?default=false', 29.90, 10, true, '2026-11-18 13:01:47.153158-03', '2026-11-18 13:01:47.153158-03', false, NULL, false, NULL, NULL, NULL);
+INSERT INTO public.books (id, title, author, publisher, isbn, description, image_url, price, stock_quantity, is_active, created_at, updated_at, is_preorder, release_date, is_new_release, promotion_price, promotion_starts_at, promotion_ends_at) OVERRIDING SYSTEM VALUE VALUES (4, 'Angústia', 'Graciliano Ramos', 'Principis', '9786550971809', 'Romance de Graciliano Ramos.', 'https://covers.openlibrary.org/b/id/4524703-L.jpg?default=false', 34.90, 10, true, '2026-11-18 13:01:47.153158-03', '2026-11-18 13:01:47.153158-03', false, NULL, false, NULL, NULL, NULL);
+INSERT INTO public.books (id, title, author, publisher, isbn, description, image_url, price, stock_quantity, is_active, created_at, updated_at, is_preorder, release_date, is_new_release, promotion_price, promotion_starts_at, promotion_ends_at) OVERRIDING SYSTEM VALUE VALUES (3, 'A Terra dos Meninos Pelados', 'Graciliano Ramos', 'Principis', '9786550971458', 'Obra infantojuvenil de Graciliano Ramos.', 'https://covers.openlibrary.org/b/id/14327298-L.jpg?default=false', 29.90, 10, true, '2026-11-18 13:01:47.153158-03', '2026-11-18 13:01:47.153158-03', false, NULL, false, NULL, NULL, NULL);
+INSERT INTO public.books (id, title, author, publisher, isbn, description, image_url, price, stock_quantity, is_active, created_at, updated_at, is_preorder, release_date, is_new_release, promotion_price, promotion_starts_at, promotion_ends_at) OVERRIDING SYSTEM VALUE VALUES (6, 'Memórias Póstumas de Brás Cubas', 'Machado de Assis', 'Principis', '9788594318619', 'Romance clássico de Machado de Assis.', 'https://covers.openlibrary.org/b/isbn/9788594318619-L.jpg?default=false', 34.90, 10, true, '2026-11-18 13:01:47.153158-03', '2026-11-18 13:01:47.153158-03', false, NULL, false, NULL, NULL, NULL);
+INSERT INTO public.books (id, title, author, publisher, isbn, description, image_url, price, stock_quantity, is_active, created_at, updated_at, is_preorder, release_date, is_new_release, promotion_price, promotion_starts_at, promotion_ends_at) OVERRIDING SYSTEM VALUE VALUES (14, '1984', 'George Orwell', 'Principis', '9786550973162', 'Romance distópico de George Orwell.', 'https://covers.openlibrary.org/b/id/10541663-L.jpg?default=false', 39.90, 10, true, '2026-11-18 13:01:47.153158-03', '2026-11-18 13:01:47.153158-03', false, '2026-10-01', true, NULL, NULL, NULL);
+INSERT INTO public.books (id, title, author, publisher, isbn, description, image_url, price, stock_quantity, is_active, created_at, updated_at, is_preorder, release_date, is_new_release, promotion_price, promotion_starts_at, promotion_ends_at) OVERRIDING SYSTEM VALUE VALUES (35, 'A Escrava Isaura', 'Bernardo Guimarães', 'Lafonte', '9788581863184', 'Romance abolicionista sobre a luta de Isaura por liberdade.', 'https://covers.openlibrary.org/b/id/647511-L.jpg?default=false', 34.90, 10, true, '2026-11-18 13:04:02.071818-03', '2026-11-18 13:04:02.071818-03', false, NULL, false, 27.90, '2026-11-18 13:14:30.293363-03', '2026-12-31 23:59:59-03');
+INSERT INTO public.books (id, title, author, publisher, isbn, description, image_url, price, stock_quantity, is_active, created_at, updated_at, is_preorder, release_date, is_new_release, promotion_price, promotion_starts_at, promotion_ends_at) OVERRIDING SYSTEM VALUE VALUES (15, 'A Volta ao Mundo em 80 Dias', 'Júlio Verne', 'Principis', '9786550973063', 'Romance de aventura de Júlio Verne.', 'https://covers.openlibrary.org/b/id/13689116-L.jpg?default=false', 34.90, 10, true, '2026-11-18 13:01:47.153158-03', '2026-11-18 13:01:47.153158-03', false, NULL, false, 27.90, '2026-11-18 13:14:30.293363-03', '2026-12-31 23:59:59-03');
+INSERT INTO public.books (id, title, author, publisher, isbn, description, image_url, price, stock_quantity, is_active, created_at, updated_at, is_preorder, release_date, is_new_release, promotion_price, promotion_starts_at, promotion_ends_at) OVERRIDING SYSTEM VALUE VALUES (32, 'Capitães da Areia', 'Jorge Amado', 'Companhia de Bolso', '9788535914061', 'Romance sobre um grupo de crianças e adolescentes em Salvador.', 'https://covers.openlibrary.org/b/id/4178919-L.jpg?default=false', 39.90, 10, true, '2026-11-18 13:03:10.23957-03', '2026-11-18 13:03:10.23957-03', false, NULL, false, 31.90, '2026-11-18 13:14:30.293363-03', '2026-12-31 23:59:59-03');
+INSERT INTO public.books (id, title, author, publisher, isbn, description, image_url, price, stock_quantity, is_active, created_at, updated_at, is_preorder, release_date, is_new_release, promotion_price, promotion_starts_at, promotion_ends_at) OVERRIDING SYSTEM VALUE VALUES (24, 'Orgulho e Preconceito', 'Jane Austen', 'Faro Editorial', '9786559573646', 'Romance clássico sobre Elizabeth Bennet e Fitzwilliam Darcy.', 'https://covers.openlibrary.org/b/id/12054378-L.jpg?default=false', 39.90, 10, true, '2026-11-18 13:03:10.23957-03', '2026-11-18 13:03:10.23957-03', false, NULL, false, 31.90, '2026-11-18 13:14:30.293363-03', '2026-12-31 23:59:59-03');
+INSERT INTO public.books (id, title, author, publisher, isbn, description, image_url, price, stock_quantity, is_active, created_at, updated_at, is_preorder, release_date, is_new_release, promotion_price, promotion_starts_at, promotion_ends_at) OVERRIDING SYSTEM VALUE VALUES (19, 'Harry Potter e a Pedra Filosofal', 'J. K. Rowling', 'Rocco', '9788532530783', 'Primeiro livro da série Harry Potter.', 'https://covers.openlibrary.org/b/isbn/9788532530783-L.jpg?default=false', 59.90, 10, true, '2026-11-18 13:03:10.23957-03', '2026-11-18 13:03:10.23957-03', false, '2026-10-10', true, NULL, NULL, NULL);
+INSERT INTO public.books (id, title, author, publisher, isbn, description, image_url, price, stock_quantity, is_active, created_at, updated_at, is_preorder, release_date, is_new_release, promotion_price, promotion_starts_at, promotion_ends_at) OVERRIDING SYSTEM VALUE VALUES (23, 'Hábitos Atômicos', 'James Clear', 'Alta Books', '9788550807560', 'Método prático para construir bons hábitos e abandonar os maus.', 'https://covers.openlibrary.org/b/isbn/9788550807560-L.jpg?default=false', 59.90, 10, true, '2026-11-18 13:03:10.23957-03', '2026-11-18 13:03:10.23957-03', false, '2026-10-15', true, NULL, NULL, NULL);
+INSERT INTO public.books (id, title, author, publisher, isbn, description, image_url, price, stock_quantity, is_active, created_at, updated_at, is_preorder, release_date, is_new_release, promotion_price, promotion_starts_at, promotion_ends_at) OVERRIDING SYSTEM VALUE VALUES (13, 'O Pequeno Príncipe', 'Antoine de Saint-Exupéry', 'Principis', '9786555521368', 'Conto clássico ilustrado pelo próprio autor.', 'https://covers.openlibrary.org/b/isbn/9786555521368-L.jpg?default=false', 29.90, 10, true, '2026-11-18 13:01:47.153158-03', '2026-11-18 13:01:47.153158-03', false, NULL, false, 23.90, '2026-11-18 13:14:30.293363-03', '2026-12-31 23:59:59-03');
+INSERT INTO public.books (id, title, author, publisher, isbn, description, image_url, price, stock_quantity, is_active, created_at, updated_at, is_preorder, release_date, is_new_release, promotion_price, promotion_starts_at, promotion_ends_at) OVERRIDING SYSTEM VALUE VALUES (26, 'Morte e Vida Severina', 'João Cabral de Melo Neto', 'Alfaguara', '9788560281329', 'Poema dramático sobre a trajetória de um retirante nordestino.', 'https://covers.openlibrary.org/b/isbn/9788560281329-L.jpg?default=false', 39.90, 10, true, '2026-11-18 13:03:10.23957-03', '2026-11-18 13:03:10.23957-03', false, NULL, false, 29.90, '2026-11-18 13:14:30.293363-03', '2026-12-31 23:59:59-03');
+INSERT INTO public.books (id, title, author, publisher, isbn, description, image_url, price, stock_quantity, is_active, created_at, updated_at, is_preorder, release_date, is_new_release, promotion_price, promotion_starts_at, promotion_ends_at) OVERRIDING SYSTEM VALUE VALUES (5, 'Dom Casmurro', 'Machado de Assis', 'Principis', '9788594318602', 'Romance clássico de Machado de Assis.', 'https://covers.openlibrary.org/b/isbn/9788594318602-L.jpg?default=false', 34.90, 10, true, '2026-11-18 13:01:47.153158-03', '2026-11-18 13:01:47.153158-03', false, NULL, false, 27.90, '2026-11-18 13:14:30.293363-03', '2026-12-31 23:59:59-03');
+INSERT INTO public.books (id, title, author, publisher, isbn, description, image_url, price, stock_quantity, is_active, created_at, updated_at, is_preorder, release_date, is_new_release, promotion_price, promotion_starts_at, promotion_ends_at) OVERRIDING SYSTEM VALUE VALUES (8, 'Quincas Borba', 'Machado de Assis', 'Principis', '9788594318855', 'Romance clássico de Machado de Assis.', 'https://covers.openlibrary.org/b/isbn/9788594318855-L.jpg?default=false', 34.90, 10, true, '2026-11-18 13:01:47.153158-03', '2026-11-18 13:01:47.153158-03', false, NULL, false, 27.90, '2026-11-18 13:14:30.293363-03', '2026-12-31 23:59:59-03');
+INSERT INTO public.books (id, title, author, publisher, isbn, description, image_url, price, stock_quantity, is_active, created_at, updated_at, is_preorder, release_date, is_new_release, promotion_price, promotion_starts_at, promotion_ends_at) OVERRIDING SYSTEM VALUE VALUES (1, 'A Metamorfose', 'Franz Kafka', 'Principis', '9788594318787', 'Clássico da literatura de Franz Kafka.', 'https://covers.openlibrary.org/b/isbn/9788594318787-L.jpg?default=false', 29.90, 10, true, '2026-11-18 13:01:47.153158-03', '2026-11-18 13:01:47.153158-03', false, NULL, false, 23.90, '2026-11-18 13:14:30.293363-03', '2026-12-31 23:59:59-03');
+INSERT INTO public.books (id, title, author, publisher, isbn, description, image_url, price, stock_quantity, is_active, created_at, updated_at, is_preorder, release_date, is_new_release, promotion_price, promotion_starts_at, promotion_ends_at) OVERRIDING SYSTEM VALUE VALUES (45, 'E Não Sobrou Nenhum', 'Agatha Christie', 'Globo Livros', '9786559870332', 'Dez pessoas isoladas em uma ilha enfrentam uma sequência de mortes.', 'https://covers.openlibrary.org/b/isbn/9786559870332-L.jpg?default=false', 59.90, 10, true, '2026-11-18 13:04:02.071818-03', '2026-11-18 13:04:02.071818-03', true, '2027-02-20', false, 47.90, '2026-11-18 13:14:30.293363-03', '2026-12-31 23:59:59-03');
+INSERT INTO public.books (id, title, author, publisher, isbn, description, image_url, price, stock_quantity, is_active, created_at, updated_at, is_preorder, release_date, is_new_release, promotion_price, promotion_starts_at, promotion_ends_at) OVERRIDING SYSTEM VALUE VALUES (18, 'Drácula', 'Bram Stoker', 'Principis', '9786550973131', 'Romance clássico de terror de Bram Stoker.', 'https://covers.openlibrary.org/b/id/12216503-L.jpg?default=false', 34.90, 10, true, '2026-11-18 13:01:47.153158-03', '2026-11-18 13:01:47.153158-03', false, '2026-10-05', true, 27.90, '2026-11-18 13:14:30.293363-03', '2026-12-31 23:59:59-03');
 
-WITH seed_books (
-  title,
-  author,
-  publisher,
-  isbn,
-  description,
-  image_url,
-  price,
-  stock_quantity,
-  is_active,
-  is_preorder,
-  release_date,
-  is_new_release,
-  promotion_price,
-  promotion_starts_at,
-  promotion_ends_at
-) AS (
-  VALUES
-    (
-      'O Mapa das Marés',
-      'Helena Duarte',
-      'Editora Horizonte',
-      '9786500001001',
-      'Uma cartógrafa retorna à cidade costeira onde cresceu para decifrar um mapa que muda a cada maré.',
-      NULL,
-      54.90,
-      18,
-      TRUE,
-      FALSE,
-      CURRENT_DATE - 120,
-      FALSE,
-      44.90,
-      CURRENT_TIMESTAMP - INTERVAL '15 days',
-      CURRENT_TIMESTAMP + INTERVAL '15 days'
-    ),
-    (
-      'A Casa no Fim da Linha',
-      'Rafael Montenegro',
-      'Sombra Editorial',
-      '9786500001002',
-      'Uma investigadora encontra registros de desaparecimentos ligados a uma casa abandonada na última estação.',
-      NULL,
-      69.90,
-      11,
-      TRUE,
-      FALSE,
-      CURRENT_DATE - 45,
-      FALSE,
-      54.90,
-      CURRENT_TIMESTAMP - INTERVAL '10 days',
-      CURRENT_TIMESTAMP + INTERVAL '35 days'
-    ),
-    (
-      'Jardim de Vidro',
-      'Lívia Campos',
-      'Pétala Livros',
-      '9786500001003',
-      'Em uma cidade onde as plantas guardam memórias, uma jovem jardineira precisa escolher quais lembranças salvar.',
-      NULL,
-      82.50,
-      7,
-      TRUE,
-      FALSE,
-      CURRENT_DATE - 30,
-      FALSE,
-      NULL,
-      NULL,
-      NULL
-    ),
-    (
-      'Cartas para Aurora',
-      'Marina Valença',
-      'Casa das Letras',
-      '9786500001004',
-      'Cartas encontradas em um sótão reconstroem uma história de amor atravessada por décadas e silêncios.',
-      NULL,
-      42.90,
-      23,
-      TRUE,
-      FALSE,
-      CURRENT_DATE - 210,
-      FALSE,
-      NULL,
-      NULL,
-      NULL
-    ),
-    (
-      'Asas de Papel',
-      'Caio Nogueira',
-      'Pequeno Leitor',
-      '9786500001005',
-      'Duas crianças constroem uma cidade de papel para descobrir que coragem também pode ser delicada.',
-      NULL,
-      34.90,
-      31,
-      TRUE,
-      FALSE,
-      CURRENT_DATE - 365,
-      FALSE,
-      NULL,
-      NULL,
-      NULL
-    ),
-    (
-      'O Último Farol',
-      'Otávio Reis',
-      'Norte Sul',
-      '9786500001006',
-      'O novo faroleiro precisa manter a luz acesa enquanto uma tempestade revela segredos enterrados na ilha.',
-      NULL,
-      64.90,
-      14,
-      TRUE,
-      FALSE,
-      CURRENT_DATE - 12,
-      TRUE,
-      NULL,
-      NULL,
-      NULL
-    ),
-    (
-      'Manual das Pequenas Invenções',
-      'Beatriz Tavares',
-      'Oficina do Saber',
-      '9786500001007',
-      'Experimentos simples e ideias práticas para transformar curiosidade em invenções feitas em casa.',
-      NULL,
-      48.00,
-      26,
-      TRUE,
-      FALSE,
-      CURRENT_DATE - 90,
-      FALSE,
-      NULL,
-      NULL,
-      NULL
-    ),
-    (
-      'O Reino Depois da Chuva',
-      'Samuel Ferraz',
-      'Editora Horizonte',
-      '9786500001008',
-      'Após uma chuva que dura cem anos, três irmãos atravessam um reino submerso em busca de sua origem.',
-      NULL,
-      99.90,
-      9,
-      TRUE,
-      FALSE,
-      CURRENT_DATE - 20,
-      FALSE,
-      79.90,
-      CURRENT_TIMESTAMP - INTERVAL '5 days',
-      CURRENT_TIMESTAMP + INTERVAL '20 days'
-    ),
-    (
-      'Anatomia de um Silêncio',
-      'Joana Ribeiro',
-      'Casa das Letras',
-      '9786500001009',
-      'Poemas sobre ausência, cuidado e as palavras que continuam vivas mesmo depois de não serem ditas.',
-      NULL,
-      39.90,
-      16,
-      TRUE,
-      FALSE,
-      CURRENT_DATE - 180,
-      FALSE,
-      NULL,
-      NULL,
-      NULL
-    ),
-    (
-      'O Colecionador de Ecos',
-      'Daniel Vilar',
-      'Sombra Editorial',
-      '9786500001010',
-      'Um perito em gravações antigas percebe que os ecos de uma coleção escondem pistas de crimes esquecidos.',
-      NULL,
-      89.90,
-      5,
-      TRUE,
-      FALSE,
-      CURRENT_DATE - 240,
-      FALSE,
-      69.90,
-      CURRENT_TIMESTAMP - INTERVAL '120 days',
-      CURRENT_TIMESTAMP - INTERVAL '60 days'
-    ),
-    (
-      'Histórias do Bairro Azul',
-      'Marta Silveira',
-      'Pequeno Leitor',
-      '9786500001011',
-      'Narrativas curtas sobre os moradores de um bairro onde cada janela guarda uma aventura diferente.',
-      NULL,
-      29.90,
-      40,
-      TRUE,
-      FALSE,
-      CURRENT_DATE - 300,
-      FALSE,
-      NULL,
-      NULL,
-      NULL
-    ),
-    (
-      'Revolução em Quadrinhos',
-      'Igor Paes',
-      'Traço Livre',
-      '9786500001012',
-      'Uma graphic novel sobre jovens artistas que transformam um pequeno estúdio em ponto de encontro da cidade.',
-      NULL,
-      59.90,
-      12,
-      TRUE,
-      FALSE,
-      CURRENT_DATE - 8,
-      TRUE,
-      NULL,
-      NULL,
-      NULL
-    ),
-    (
-      'Depois do Inverno',
-      'Clara Monteiro',
-      'Pétala Livros',
-      '9786500001014',
-      'Duas pessoas se reencontram em uma estação serrana e precisam decidir o que fazer com uma promessa antiga.',
-      NULL,
-      45.90,
-      19,
-      TRUE,
-      FALSE,
-      CURRENT_DATE - 18,
-      TRUE,
-      NULL,
-      NULL,
-      NULL
-    ),
-    (
-      'A Biblioteca do Amanhã',
-      'Teresa Avelar',
-      'Norte Sul',
-      '9786500001015',
-      'Uma bibliotecária descobre que os livros de uma sala secreta contam acontecimentos que ainda não ocorreram.',
-      NULL,
-      119.90,
-      0,
-      TRUE,
-      TRUE,
-      CURRENT_DATE + 90,
-      FALSE,
-      NULL,
-      NULL,
-      NULL
-    ),
-    (
-      'Navegantes do Vento',
-      'Lucas Andrade',
-      'Editora Horizonte',
-      '9786500001016',
-      'Pilotos de navios voadores atravessam arquipélagos suspensos para impedir que o céu perca suas correntes.',
-      NULL,
-      109.90,
-      0,
-      TRUE,
-      TRUE,
-      CURRENT_DATE + 150,
-      FALSE,
-      NULL,
-      NULL,
-      NULL
-    )
-),
-inserted_books AS (
-  INSERT INTO books (
-    title,
-    author,
-    publisher,
-    isbn,
-    description,
-    image_url,
-    price,
-    stock_quantity,
-    is_active,
-    is_preorder,
-    release_date,
-    is_new_release,
-    promotion_price,
-    promotion_starts_at,
-    promotion_ends_at
-  )
-  SELECT
-    title,
-    author,
-    publisher,
-    isbn,
-    description,
-    image_url,
-    price,
-    stock_quantity,
-    is_active,
-    is_preorder,
-    release_date,
-    is_new_release,
-    promotion_price,
-    promotion_starts_at,
-    promotion_ends_at
-  FROM seed_books
-  ON CONFLICT (isbn) DO NOTHING
-  RETURNING id, isbn
-),
-seed_categories (isbn, category_slug) AS (
-  VALUES
-    ('9786500001001', 'ficcao'),
-    ('9786500001001', 'acao'),
-    ('9786500001002', 'terror-e-suspense'),
-    ('9786500001002', 'serial-killers'),
-    ('9786500001003', 'fantasia'),
-    ('9786500001003', 'romance'),
-    ('9786500001004', 'romance'),
-    ('9786500001004', 'poesia'),
-    ('9786500001005', 'infantil'),
-    ('9786500001005', 'ficcao'),
-    ('9786500001006', 'ficcao'),
-    ('9786500001006', 'acao'),
-    ('9786500001007', 'nao-ficcao'),
-    ('9786500001007', 'infantil'),
-    ('9786500001008', 'fantasia'),
-    ('9786500001008', 'acao'),
-    ('9786500001009', 'poesia'),
-    ('9786500001009', 'romance'),
-    ('9786500001010', 'terror-e-suspense'),
-    ('9786500001010', 'serial-killers'),
-    ('9786500001011', 'infantil'),
-    ('9786500001011', 'ficcao'),
-    ('9786500001012', 'hqs-e-mangas'),
-    ('9786500001012', 'acao'),
-    ('9786500001014', 'romance'),
-    ('9786500001014', 'ficcao'),
-    ('9786500001015', 'fantasia'),
-    ('9786500001015', 'ficcao'),
-    ('9786500001016', 'fantasia'),
-    ('9786500001016', 'hqs-e-mangas')
-)
-INSERT INTO book_categories (book_id, category_id)
-SELECT inserted_books.id, categories.id
-FROM seed_categories
-INNER JOIN inserted_books
-  ON inserted_books.isbn = seed_categories.isbn
-INNER JOIN categories
-  ON categories.slug = seed_categories.category_slug
-ON CONFLICT (book_id, category_id) DO NOTHING;
+INSERT INTO public.book_categories (book_id, category_id) VALUES (1, 2);
+INSERT INTO public.book_categories (book_id, category_id) VALUES (2, 5);
+INSERT INTO public.book_categories (book_id, category_id) VALUES (3, 6);
+INSERT INTO public.book_categories (book_id, category_id) VALUES (4, 1);
+INSERT INTO public.book_categories (book_id, category_id) VALUES (5, 5);
+INSERT INTO public.book_categories (book_id, category_id) VALUES (6, 1);
+INSERT INTO public.book_categories (book_id, category_id) VALUES (8, 1);
+INSERT INTO public.book_categories (book_id, category_id) VALUES (9, 1);
+INSERT INTO public.book_categories (book_id, category_id) VALUES (10, 5);
+INSERT INTO public.book_categories (book_id, category_id) VALUES (11, 1);
+INSERT INTO public.book_categories (book_id, category_id) VALUES (12, 1);
+INSERT INTO public.book_categories (book_id, category_id) VALUES (13, 6);
+INSERT INTO public.book_categories (book_id, category_id) VALUES (14, 1);
+INSERT INTO public.book_categories (book_id, category_id) VALUES (15, 7);
+INSERT INTO public.book_categories (book_id, category_id) VALUES (18, 2);
+INSERT INTO public.book_categories (book_id, category_id) VALUES (32, 1);
+INSERT INTO public.book_categories (book_id, category_id) VALUES (33, 10);
+INSERT INTO public.book_categories (book_id, category_id) VALUES (34, 1);
+INSERT INTO public.book_categories (book_id, category_id) VALUES (19, 4);
+INSERT INTO public.book_categories (book_id, category_id) VALUES (20, 4);
+INSERT INTO public.book_categories (book_id, category_id) VALUES (21, 4);
+INSERT INTO public.book_categories (book_id, category_id) VALUES (22, 4);
+INSERT INTO public.book_categories (book_id, category_id) VALUES (23, 10);
+INSERT INTO public.book_categories (book_id, category_id) VALUES (24, 5);
+INSERT INTO public.book_categories (book_id, category_id) VALUES (25, 6);
+INSERT INTO public.book_categories (book_id, category_id) VALUES (26, 9);
+INSERT INTO public.book_categories (book_id, category_id) VALUES (35, 5);
+INSERT INTO public.book_categories (book_id, category_id) VALUES (36, 9);
+INSERT INTO public.book_categories (book_id, category_id) VALUES (37, 2);
+INSERT INTO public.book_categories (book_id, category_id) VALUES (45, 2);
+INSERT INTO public.book_categories (book_id, category_id) VALUES (50, 10);
+INSERT INTO public.book_categories (book_id, category_id) VALUES (52, 1);
+INSERT INTO public.book_categories (book_id, category_id) VALUES (54, 9);
+INSERT INTO public.book_categories (book_id, category_id) VALUES (55, 5);
+INSERT INTO public.book_categories (book_id, category_id) VALUES (56, 5);
+INSERT INTO public.book_categories (book_id, category_id) VALUES (58, 1);
+INSERT INTO public.book_categories (book_id, category_id) VALUES (59, 5);
+
+SELECT pg_catalog.setval('public.books_id_seq', 60, true);
 
 COMMIT;
