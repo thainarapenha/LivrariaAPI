@@ -2,7 +2,7 @@
 
 API desenvolvida para o back-end da aplicação **Meu Livro**, um e-commerce de livraria online que permite aos usuários explorar livros, pesquisar títulos, consultar detalhes, visualizar promoções e lançamentos, gerenciar o carrinho e realizar compras simuladas.
 
-O projeto surgiu como trabalho final de módulo do curso de formação em Desenvolvimento Web Full Stack da Resilia Educação, em 2022. Em 2026, foi reformulado, com melhorias na arquitetura, padronização da nomenclatura, refatoração das tabelas e relacionamentos, além de refatoração de rotas e infra.
+O projeto surgiu como trabalho final de módulo do curso de formação em Desenvolvimento Web Full Stack da Resilia Educação, em 2022. Em 2026, foi reformulado com melhorias na arquitetura, padronização da nomenclatura, refatoração das tabelas e relacionamentos, refatoração de rotas, além da configuração de um novo banco e hospedagem.
 
 **Repositório Front-End:** [Meu Livro](https://github.com/thainarapenha/MeuLivro)
 
