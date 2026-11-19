@@ -135,13 +135,13 @@ O pedido deve ser enviado com os itens e quantidades desejados. O cliente é ide
 Clonando o repositório:
 
 ```bash
-git clone https://github.com/thainarapenha/LivrariaAPI.git
+git clone https://github.com/thainarapenha/MeuLivroAPI.git
 ```
 
 Entrar na pasta do projeto:
 
 ```bash
-cd LivrariaAPI
+cd MeuLivroAPI
 ```
 
 Instalando todos os pacotes:
@@ -199,9 +199,3 @@ npm start
 ## Contato
 Site: [thainarapenha.com](https://www.thainarapenha.com/)
 LinkedIn: [Thainara Penha](https://www.linkedin.com/in/thainarapenha/)
-
-## Frontend
-
-O frontend do projeto Meu Livro foi desenvolvido separadamente.
-
-Repositório: URL_DO_REPOSITORIO_FRONTEND
