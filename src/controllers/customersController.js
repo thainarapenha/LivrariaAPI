@@ -4,6 +4,7 @@ import {
   DuplicateEmailError,
   getCustomerById,
   registerCustomer,
+  updateCustomerProfile,
   ValidationError,
 } from '../services/customersService.js'
 
@@ -57,6 +58,31 @@ export const getCurrentCustomer = async (request, response) => {
 
     return response.status(200).json(customer)
   } catch (error) {
+    return response.status(500).json({ error: 'Internal server error' })
+  }
+}
+
+export const updateCurrentCustomer = async (request, response) => {
+  try {
+    const customer = await updateCustomerProfile(
+      request.authenticatedCustomerId,
+      request.body,
+    )
+
+    if (!customer) {
+      return response.status(404).json({ error: 'Customer not found' })
+    }
+
+    return response.status(200).json(customer)
+  } catch (error) {
+    if (error instanceof ValidationError) {
+      return response.status(400).json({ error: error.message })
+    }
+
+    if (error instanceof DuplicateEmailError) {
+      return response.status(409).json({ error: 'Email is already registered.' })
+    }
+
     return response.status(500).json({ error: 'Internal server error' })
   }
 }

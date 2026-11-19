@@ -9,6 +9,12 @@ if (!process.env.DATABASE_URI) {
 
 export const database = new Pool({
   connectionString: process.env.DATABASE_URI,
+  max: 10,
+  idleTimeoutMillis: 10000,
+  connectionTimeoutMillis: 10000,
+  ...(process.env.NODE_ENV === 'production'
+    ? { ssl: { rejectUnauthorized: false } }
+    : {}),
 })
 
 database.on('error', (error) => {
