@@ -1,269 +1,207 @@
-# Livraria API REST 📚
+# Meu Livro API
 
-> ### Aplicação back-end desenvolvida pelo Squad 3 para a finalização do módulo 4 do curso de Desenvolvimento Web FullStack da Resilia Educação. 💛
+API desenvolvida para o back-end da aplicação **Meu Livro**, um e-commerce de livraria online que permite aos usuários explorar livros, pesquisar títulos, consultar detalhes, visualizar promoções e lançamentos, gerenciar o carrinho e realizar compras simuladas.
 
-![npm](https://img.shields.io/npm/v/8.5?style=for-the-badge)
-![contributors](https://img.shields.io/github/contributors/thainarapenha/LivrariaAPI?style=for-the-badge)
-![pull requests](https://img.shields.io/github/issues-pr-closed/thainarapenha/LivrariaAPI?style=for-the-badge)
-![express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
-![Node.js](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
-![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+O projeto foi desenvolvido para oferecer uma experiência de compra online, com catálogo de livros, gerenciamento de clientes, autenticação e processamento de pedidos.
 
-<!--ts-->
+**Repositório Front-End:** [Meu Livro](https://github.com/thainarapenha/MeuLivro)
 
-- [Descrição](#descricao)
-- [Tabela de Conteúdo](#tabela-de-conteudo)
-- [Rotas da API](#rotas-da-api)
-- [Livros](#Livros)
-- [Usuários](#rotas-usuarios)
-- [Funcionários](#rotas-funcionarios)
-- [Estoque](#rotas-estoque)
-- [Como executar o projeto?](#como-executar-o-projeto)
-- [Requisitos](#Requisitos-dependências)
-- [Instalação das dependências](#instalacao)
-- [Desenvolvedores](#desenvolvedores)
-<!--te-->
+<div align="center">Node.js | JavaScript | Express | PostgreSQL | JWT | bcrypt | REST API</div>
 
-# Rotas da API
+## O que tem feito
 
-> ### As rotas são acessada através do http://localhost:3000/_nome-rota_
+### Autenticação
+- [x] Cadastro de clientes
+- [x] Login com e-mail e senha
+- [x] Hash de senha com bcrypt
+- [x] Autenticação via JWT
+- [x] Middleware de autenticação
+- [x] Restringir operações aos clientes autenticados
+- [x] Validar e-mails sem diferenciar letras maiúsculas e minúsculas
+- [x] Consultar dados do cliente autenticado
+- [x] Atualizar dados cadastrais do cliente
 
-## Livros 📚
+### Livros
+- [x] Lista livros disponíveis
+- [x] Consulta detalhes de um livro por ID
+- [x] Lista livros por categoria
+- [x] Associar livros às categorias
+- [x] Identificar livros em pré-venda
+- [x] Identificar livros em lançamento
+- [x] Identificar livros em promoção
 
-| Métodos |    Rotas     |               Descrição               |
-| ------- | :----------: | :-----------------------------------: |
-| GET     |   /livros    |   Retorna tabela inteira de livros    |
-| GET     | /livros/_id_ |   Retorna livro especificado por id   |
-| POST    |   /livros    |     Cria um novo livro na tabela      |
-| PATCH   | /livros/_id_ | Atualiza um livro especificado por id |
-| DELETE  | /livros/_id_ |  Deleta um livro especificado por id  |
+### Pedidos
+- [x] Cria pedidos vinculados ao cliente autenticado
+- [x] Calcula o valor total da compra
+- [x] Registra os itens do pedido
+- [x] Armazena informações dos livros nos itens do pedido
+- [x] Valida disponibilidade de estoque
+- [x] Valida os livros e quantidades informados
+- [x] Consulta detalhes de um pedido
+- [x] Consulta pedidos do cliente autenticado
+- [x] Restringe a consulta de pedidos ao respectivo cliente
 
-Acessar livros pela rota: http://localhost:3000/livros
+### Infraestrutura e Segurança
+- [x] Organiza o projeto em camadas
+- [x] Separa controllers, services e repositories
+- [x] Configura autenticação JWT
+- [x] Configura conexão com PostgreSQL
+- [x] Configura variáveis de ambiente
+- [x] Configura CORS para origens autorizadas
+- [x] Implementa tratamento padronizado de erros
 
-Modelo do corpo da requisição:
+## O que falta
+- [ ] Recuperação de senha
+- [ ] Code Review de novas implementações
 
+## Endpoints
+
+### Saúde da API
+
+| Método | Rota | Descrição |
+| :---: | :--- | :--- |
+| GET | `/health` | Verifica a disponibilidade da API |
+| GET | `/ready` | Verifica se a API está pronta e conectada ao banco de dados |
+
+### Livros
+
+| Método | Rota | Descrição |
+| :---: | :--- | :--- |
+| GET | `/books` | Lista os livros disponíveis |
+| GET | `/books/:id` | Consulta os detalhes de um livro |
+
+### Categorias
+
+| Método | Rota | Descrição |
+| :---: | :--- | :--- |
+| GET | `/categories` | Lista as categorias disponíveis |
+
+### Clientes e autenticação
+
+| Método | Rota | Descrição |
+| :---: | :--- | :--- |
+| POST | `/customers/register` | Cadastra um novo cliente |
+| POST | `/customers/login` | Autentica o cliente e retorna um token JWT |
+| GET | `/customers/me` | Consulta os dados do cliente autenticado |
+| PATCH | `/customers/me` | Atualiza os dados do cliente autenticado |
+
+### Pedidos
+
+| Método | Rota | Descrição |
+| :---: | :--- | :--- |
+| POST | `/orders` | Cria um pedido para o cliente autenticado |
+| GET | `/orders` | Lista os pedidos do cliente autenticado |
+| GET | `/orders/:id` | Consulta os detalhes de um pedido |
+
+As rotas de clientes que exigem autenticação e todas as rotas de pedidos protegidas utilizam JWT.
+
+O token deve ser enviado no header:
+
+```http
+Authorization: Bearer SEU_TOKEN
 ```
+
+As rotas públicas de catálogo e cadastro/login não exigem autenticação.
+
+## JSON
+
+### POST /customers/register
+
+```json
 {
-    "titulo": "título do livro",
-    "descricao": "descrição do livro",
-    "categoria": "categoria do livro",
-    "url_image": "URL da imagem do livro",
-    "preco": "preço do livro",
-    "total_paginas": "quantidade de páginas do livro",
-    "ano_publicacao": "ano da publicação do livro",
-    "autor": "autor do livro"
-}
-
-Exemplo:
-
-{
-    "titulo": "Código limpo: Habilidades práticas do Agile Software",
-    "descricao": "Mesmo um código ruim pode funcionar. Mas se ele não for limpo, pode acabar com uma empresa de desenvolvimento. Perdem-se a cada ano [...]",
-    "categoria": "Programação",
-    "url_image": "https://images-na.ssl-images-amazon.com/images/I/4153E2zZmTS._SX350_BO1,204,203,200_.jpg",
-    "preco": "69.99",
-    "total_paginas": "425",
-    "ano_publicacao": "2009",
-    "autor": "Robert C. Martin"
-}
-```
-
-## Usuários 🙂
-
-| Métodos |     Rotas      |                Descrição                |
-| ------- | :------------: | :-------------------------------------: |
-| GET     |   /usuarios    |   Retorna tabela inteira de usuarios    |
-| GET     | /usuarios/_id_ |   Retorna usuario especificado por id   |
-| POST    |   /usuarios    |     Cria um novo usuario na tabela      |
-| PATCH   | /usuarios/_id_ | Atualiza um usuario especificado por id |
-| DELETE  | /usuarios/_id_ |  Deleta um usuario especificado por id  |
-
-Acessar usuarios pela rota: http://localhost:3000/usuarios
-
-Modelo do corpo da requisição:
-
-```
-{
-    "CPF": "cpf do usuário",
-    "nome": "nome do usuário",
-    "email": "email do usuário",
-    "senha": "senha do usuário"
-}
-
-Exemplo:
-
-{
-    "CPF": "12345678900",
-    "nome": "Maria Augusta",
-    "email": "maria.augusta@gmail.com",
-    "senha": "123456"
-}
-```
-
-## Funcionários 💼
-
-| Métodos |       Rotas        |                  Descrição                  |
-| ------- | :----------------: | :-----------------------------------------: |
-| GET     |   /funcionarios    |   Retorna tabela inteira de funcionarios    |
-| GET     | /funcionarios/_id_ |   Retorna funcionario especificado por id   |
-| POST    |   /funcionarios    |     Cria um novo funcionario na tabela      |
-| PATCH   | /funcionarios/_id_ | Atualiza um funcionario especificado por id |
-| DELETE  | /funcionarios/_id_ |  Deleta um funcionario especificado por id  |
-
-Acessar pela rota: http://localhost:3000/funcionarios
-
-Modelo do corpo da requisição:
-
-```
-{
-    "CPF": "cpf do funcionário",
-    "nome": "nome do funcionário",
-    "cargo": "cargo do funcionário",
-    "salario": "salário do funcionário",
-    "statusFuncionario": "informa se está trabalhando ou de férias"
-}
-
-Exemplo:
-
-{
-    "CPF": "12345678900",
-    "nome": "João da Silva",
-    "cargo": "Gerente de vendas",
-    "salário: "2.500",
-    "statusFuncionario": "Férias"
+  "name": "Seu Nome",
+  "email": "seu_email@teste.com",
+  "password": "sua_senha"
 }
 ```
 
-## Estoque 📦
+### POST /customers/login
 
-| Métodos |     Rotas     |                Descrição                |
-| ------- | :-----------: | :-------------------------------------: |
-| GET     |   /estoque    |    Retorna tabela inteira de estoque    |
-| GET     | /estoque/_id_ |  Retorna estoque o especificado por id  |
-| POST    |   /estoque    |     Cria um novo estoque na tabela      |
-| PATCH   | /estoque/_id_ | Atualiza um estoque especificado por id |
-| DELETE  | /estoque/_id_ |  Deleta um estoque especificado por id  |
-
-Acessar pela rota: http://localhost:3000/estoque
-
-Modelo do corpo da requisição:
-
-```
+```json
 {
-    "nome_fornecedor": "nome do fornecedor",
-    "CNPJ": "CNPJ do fornecedor",
-    "qnt_livros": "quantidade de livros",
-    "lote": "número do lote",
-    "nome_obra": "nome da obra",
-    "preco_lote": "preço do lote"
-}
-
-Exemplo:
-
-{
-    "nome_fornecedor": "Alta Books",
-    "CNPJ": "12345678900",
-    "qnt_livros": "186",
-    "lote": "02154878787841IF",
-    "nome_obra": "Código limpo: Habilidades práticas do agile software",
-    "preco_lote": "8.000,00"
+  "email": "seu_email@teste.com",
+  "password": "sua_senha"
 }
 ```
 
-# Como executar o projeto? 🤔
+### POST /orders
 
-## 1.0 Requisitos para rodar localmente 💻
+O pedido deve ser enviado com os itens e quantidades desejados. O cliente é identificado pelo token JWT, não por um ID informado pelo frontend.
 
-Ferramentas **necessárias** para executar a API localmente:
+> A estrutura exata do corpo da requisição deve ser documentada conforme a validação implementada no endpoint.
 
-<!--ts-->
+##  Instalando e Executando
 
-- [VsCode](https://code.visualstudio.com/download) ou outro editor de preferência
-- [Node.js](https://nodejs.org/en/download/) instalado na máquina
-- [Postman](https://www.postman.com/downloads/), [Insomnia](https://insomnia.rest/download) ou semelhante.
-<!--te-->
+Clonando o repositório:
 
-### 1.1 Instalando as dependências 🛠️
-
-#### 1.1.1 Clone este repositório _localmente_ em sua máquina
-
-```
-git clone git@github.com:thainarapenha/LivrariaAPI.git
+```bash
+git clone https://github.com/thainarapenha/LivrariaAPI.git
 ```
 
-### 1.1.2 Entre na pasta do projeto
+Entrar na pasta do projeto:
 
-```
+```bash
 cd LivrariaAPI
 ```
 
-#### 1.1.3 Execute o seguinte comando para instalar as dependências do projeto:
+Instalando todos os pacotes:
 
-```
+```bash
 npm install
 ```
 
-#### 1.1.4 Execute o seguinte script para rodar o servidor:
+Rodando o projeto:
 
 ```
 npm run dev
 ```
 
-#### 1.1.5 Abra o Insomnia e execute a rotas especificadas 💻👌
+### Configurando as variáveis de ambiente
 
-## Desenvolvedores(as) 👨‍💻
+Crie um arquivo `.env` na raiz do projeto, utilizando o `.env.example` como referência.
 
-<table>
-    <th>
-      <a href="https://github.com/thainarapenha">
-        <img src="https://avatars.githubusercontent.com/thainarapenha" width="115"><br><br>
-        <p align="center">
-            <a href="https://github.com/thainarapenha" target="_blank">
-                <img 
-                    src="https://img.shields.io/badge/thainarapenha-100000?style=flat-square&logo=github&logoColor=white" 
-                    alt="thainarapenha"
-                />
-            </a>
-        </p>
-      </a>
-    </th>
-    <th>
-      <a href="https://github.com/isadoraraujo">
-        <img src="https://avatars.githubusercontent.com/isadoraraujo" width="115"><br><br>
-        <p align="center">
-            <a href="https://github.com/isadoraraujo" target="_blank">
-                <img 
-                    src="https://img.shields.io/badge/isadoraraujo-100000?style=flat-square&logo=github&logoColor=white" 
-                    alt="isadoraraujo"
-                />
-            </a>
-        </p>
-      </a>
-    </th>
-    <th>
-    <a href="https://github.com/lucasmedeiros7">
-        <img src="https://avatars.githubusercontent.com/lucasmedeiros7" width="115"><br><br>
-        <p align="center">
-            <a href="https://github.com/lucasmedeiros7" target="_blank">
-                <img 
-                    src="https://img.shields.io/badge/lucasmedeiros7-100000?style=flat-square&logo=github&logoColor=white" 
-                    alt="lucasmedeiros7"
-                />
-            </a>
-        </p>
-      </a>
-    </th>
-    <th>
-    <a href="https://github.com/kamirii">
-        <img src="https://avatars.githubusercontent.com/kamirii" width="115"><br><br>
-        <p align="center">
-            <a href="https://github.com/kamirii" target="_blank">
-                <img 
-                    src="https://img.shields.io/badge/kamirii-100000?style=flat-square&logo=github&logoColor=white" 
-                    alt="kamirii"
-                />
-            </a>
-        </p>
-      </a>
-    </th>
-    </table>
+Variáveis necessárias:
+
+```env
+DATABASE_URI=sua_url_de_conexao_postgresql
+JWT_SECRET=seu_segredo_jwt
+JWT_EXPIRES_IN=1d
+CORS_ORIGIN=http://localhost:5173
+```
+
+Não compartilhe ou versione o arquivo `.env`.
+
+### Configurando o banco de dados
+
+O projeto utiliza PostgreSQL.
+
+Os arquivos SQL estão organizados em:
+
+- `database/schema.sql`: estrutura das tabelas, relacionamentos, índices e categorias iniciais.
+- `database/scripts/seed_catalog.sql`: dados iniciais do catálogo de livros.
+
+Em uma instalação nova, execute primeiro o `schema.sql` e depois o `seed_catalog.sql`.
+
+**Atenção:** o seed contém os registros reais do catálogo atual e não deve ser executado novamente sobre um banco que já tenha esses livros cadastrados.
+
+### Executando localmente
+
+```bash
+npm run dev
+```
+
+Para iniciar em modo de produção:
+
+```bash
+npm start
+```
+
+## Contato
+Site: [thainarapenha.com](https://www.thainarapenha.com/)
+LinkedIn: [Thainara Penha](https://www.linkedin.com/in/thainarapenha/)
+
+## Frontend
+
+O frontend do projeto Meu Livro foi desenvolvido separadamente.
+
+Repositório: URL_DO_REPOSITORIO_FRONTEND
